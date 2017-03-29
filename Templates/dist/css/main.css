@@ -1,0 +1,11 @@
+@import url(../css/bootstrap.css);
+@import url(../css/bootstrap.min.css);
+body {
+  min-height: 2000px;
+  padding-top: 70px;
+  background-color: blue; }
+
+body {
+  background-color: blue; }
+
+/*# sourceMappingURL=main.css.map */
