@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 31-Mar-2017 às 17:02
--- Versão do servidor: 10.1.19-MariaDB
--- PHP Version: 7.0.13
+-- Generation Time: 05-Abr-2017 às 01:31
+-- Versão do servidor: 10.1.16-MariaDB
+-- PHP Version: 7.0.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -29,7 +29,6 @@ SET time_zone = "+00:00";
 CREATE TABLE `comentario` (
   `comentario_id` int(11) NOT NULL,
   `comentario_conteudo` varchar(140) NOT NULL,
-  `comentario_likes` int(11) NOT NULL,
   `comentario_pub_dt` datetime NOT NULL,
   `status` tinyint(1) NOT NULL,
   `publicacao_id` int(11) NOT NULL,
@@ -66,6 +65,18 @@ CREATE TABLE `iftag` (
 -- --------------------------------------------------------
 
 --
+-- Estrutura da tabela `likes_relacionamento`
+--
+
+CREATE TABLE `likes_relacionamento` (
+  `usuario_id` int(11) NOT NULL,
+  `publicacao_id` int(11) NOT NULL,
+  `comentario_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura da tabela `midia`
 --
 
@@ -86,7 +97,6 @@ CREATE TABLE `publicacao` (
   `publicacao_id` int(11) NOT NULL,
   `publicacao_titulo` varchar(50) NOT NULL,
   `publicacao_legenda` varchar(140) NOT NULL,
-  `publicacao_likes` int(11) NOT NULL,
   `publicacao_status` tinyint(1) NOT NULL,
   `publicacao_dt` datetime NOT NULL,
   `usuario_id_autor` int(11) NOT NULL,
@@ -164,6 +174,14 @@ ALTER TABLE `denuncia`
 --
 ALTER TABLE `iftag`
   ADD PRIMARY KEY (`iftag_id`);
+
+--
+-- Indexes for table `likes_relacionamento`
+--
+ALTER TABLE `likes_relacionamento`
+  ADD KEY `fk_usuario_likes` (`usuario_id`),
+  ADD KEY `fk_publicacao_likes` (`publicacao_id`),
+  ADD KEY `fk_comentario_likes` (`comentario_id`);
 
 --
 -- Indexes for table `midia`
@@ -259,6 +277,14 @@ ALTER TABLE `denuncia`
   ADD CONSTRAINT `denuncia_ibfk_2` FOREIGN KEY (`publicacao_id`) REFERENCES `publicacao` (`publicacao_id`),
   ADD CONSTRAINT `denuncia_ibfk_3` FOREIGN KEY (`usuario_id_autor`) REFERENCES `usuario` (`usuario_id`),
   ADD CONSTRAINT `denuncia_ibfk_4` FOREIGN KEY (`usuario_id_avaliador`) REFERENCES `usuario` (`usuario_id`);
+
+--
+-- Limitadores para a tabela `likes_relacionamento`
+--
+ALTER TABLE `likes_relacionamento`
+  ADD CONSTRAINT `likes_relacionamento_ibfk_1` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`usuario_id`),
+  ADD CONSTRAINT `likes_relacionamento_ibfk_2` FOREIGN KEY (`publicacao_id`) REFERENCES `publicacao` (`publicacao_id`),
+  ADD CONSTRAINT `likes_relacionamento_ibfk_3` FOREIGN KEY (`comentario_id`) REFERENCES `comentario` (`comentario_id`);
 
 --
 -- Limitadores para a tabela `midia`
