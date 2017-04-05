@@ -1,8 +1,6 @@
-@import     'estilos';
 @import     '../css/bootstrap.css';
 @import     '../css/bootstrap.min.css';
 
+@import 	'variables';
 
-body {
-    background-color: yellow;
-}
+@import     'estilos';

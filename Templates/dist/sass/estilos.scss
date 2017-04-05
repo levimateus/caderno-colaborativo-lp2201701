@@ -1,5 +1,13 @@
+
+
 body {
   min-height: 2000px;
   padding-top: 70px;
-  background-color: blue;
+  background-color: $cinza;
+}
+
+
+.jumbotron {
+	@include cores(blue, yellow);
+
 }

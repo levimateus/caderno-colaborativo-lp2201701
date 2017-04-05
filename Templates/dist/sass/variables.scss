@@ -1,0 +1,6 @@
+@mixin cores($fundo: '#fff', $borda: '#fff') {
+	background-color: $fundo;
+	border: 1px solid $borda;
+}
+
+$cinza: #f1f1f1;
