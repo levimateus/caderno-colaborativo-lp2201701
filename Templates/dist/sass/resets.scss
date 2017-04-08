@@ -1,0 +1,24 @@
+// Scss para coisas padrões
+body {
+  min-height: 2000px;
+  padding-top: 70px;
+  background-color: #fff;
+  position: relative;
+  font-family: 'Roboto', sans-serif;
+}
+
+main {
+	z-index: 5;
+	margin: auto;
+	height: 100%;
+	.container {
+		padding: 15px;
+	}
+}
+
+
+//Utilizar para centralizar elementos
+.centered {
+	display: flex;
+	align-items: center;
+}
