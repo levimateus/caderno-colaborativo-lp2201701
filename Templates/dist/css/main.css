@@ -56,23 +56,23 @@ article.post {
 .login-page {
   position: fixed;
   top: 50%;
-  bottom: 50%;
-  left: 0;
-  right: 0;
-  margin: auto;
+  left: 50%;
   width: 400px;
-  height: 400px; }
+  height: 400px;
+  transform: translate(-50%, -50%); }
   .login-page * {
     border-radius: 0 !important; }
   .login-page .form-signin {
     max-width: 400px;
     margin: auto;
     padding: 15px; }
+  .login-page .form-signin-heading {
+    color: #467b1e; }
   .login-page input[type="text"] {
     border-bottom: 0; }
   .login-page button {
     background-color: #69B92D;
-    color: #fff;
+    color: #fff !important;
     border: none; }
     .login-page button:hover, .login-page button:active, .login-page button:focus {
       background-color: #467b1e; }
