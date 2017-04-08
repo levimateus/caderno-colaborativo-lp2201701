@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto:400,700");
 @import url(../css/bootstrap.min.css);
 @import url(../css/font-awesome.min.css);
-.menu, article.post {
+.menu, article.post, .login-page .form-signin {
   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.15); }
 
 .menu {
@@ -28,8 +28,6 @@
     margin-right: 10px; }
 
 article.post {
-  max-width: 650px;
-  margin: auto;
   margin-bottom: 50px;
   padding: 15px;
   color: #1d1d1d; }
@@ -55,8 +53,31 @@ article.post {
     article.post .post-info span:last-child {
       float: right; }
 
+.login-page {
+  position: fixed;
+  top: 50%;
+  bottom: 50%;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 400px;
+  height: 400px; }
+  .login-page * {
+    border-radius: 0 !important; }
+  .login-page .form-signin {
+    max-width: 400px;
+    margin: auto;
+    padding: 15px; }
+  .login-page input[type="text"] {
+    border-bottom: 0; }
+  .login-page button {
+    background-color: #69B92D;
+    color: #fff;
+    border: none; }
+    .login-page button:hover, .login-page button:active, .login-page button:focus {
+      background-color: #467b1e; }
+
 body {
-  min-height: 2000px;
   padding-top: 70px;
   background-color: #fff;
   position: relative;
@@ -68,6 +89,10 @@ main {
   height: 100%; }
   main .container {
     padding: 15px; }
+
+.ifBlock {
+  max-width: 650px;
+  margin: auto; }
 
 .centered {
   display: flex;
