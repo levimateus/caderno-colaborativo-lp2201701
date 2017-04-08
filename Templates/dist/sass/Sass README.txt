@@ -2,6 +2,7 @@
 	O sass é um pré compilador de Css, ou seja quando vc for fazer alguma alteração nunca altere o ar-
 quivo .cssaltere sempre os arquivos com .scss, com o sass nós conseguimos utilizar variáveis, funções, ex-
 tenções muito mais fácil.
+	Vocês podem aprender mais no link oficial deles: http://sass-lang.com/
 
 *Como utilizar o Sass.*
 
