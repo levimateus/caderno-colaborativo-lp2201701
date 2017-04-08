@@ -1,6 +1,14 @@
-@import     '../css/bootstrap.css';
-@import     '../css/bootstrap.min.css';
+//Fonts
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,700');
 
+//Libs
+@import     '../css/bootstrap.min.css';
+@import     '../css/font-awesome.min.css';
+
+//Variables - Mixins
 @import 	'variables';
 
-@import     'estilos';
+//Styles
+@import     'header';
+@import     'posts';
+@import     'resets';

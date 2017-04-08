@@ -1,12 +1,76 @@
-@import url(../css/bootstrap.css);
+@import url("https://fonts.googleapis.com/css?family=Roboto:400,700");
 @import url(../css/bootstrap.min.css);
+@import url(../css/font-awesome.min.css);
+.menu, article.post {
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.15); }
+
+.menu {
+  background-color: #69B92D;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 10;
+  color: #fff; }
+  .menu h1,
+  .menu h2 {
+    font-weight: 700;
+    font-size: 25px;
+    margin: 9px auto; }
+  .menu h2 {
+    text-align: center; }
+  .menu span {
+    font-size: 18px;
+    float: right;
+    margin-left: 5px; }
+  .menu .fa {
+    font-size: 27px;
+    margin-right: 10px; }
+
+article.post {
+  max-width: 650px;
+  margin: auto;
+  margin-bottom: 50px;
+  padding: 15px;
+  color: #1d1d1d; }
+  article.post h4 {
+    font-weight: 700;
+    color: #467b1e;
+    margin: 15px 0;
+    border-bottom: 1px solid #467b1e;
+    padding-bottom: 3px; }
+  article.post p {
+    margin: 10px 0; }
+  article.post a {
+    text-decoration: underline;
+    color: #1d1d1d; }
+  article.post .post-img {
+    margin-left: -15px;
+    margin-right: -15px; }
+  article.post .post-info {
+    margin-bottom: 25px;
+    font-style: italic; }
+    article.post .post-info span {
+      float: left; }
+    article.post .post-info span:last-child {
+      float: right; }
+
 body {
   min-height: 2000px;
   padding-top: 70px;
-  background-color: #f1f1f1; }
+  background-color: #fff;
+  position: relative;
+  font-family: 'Roboto', sans-serif; }
 
-.jumbotron {
-  background-color: blue;
-  border: 1px solid yellow; }
+main {
+  z-index: 5;
+  margin: auto;
+  height: 100%; }
+  main .container {
+    padding: 15px; }
+
+.centered {
+  display: flex;
+  align-items: center; }
 
 /*# sourceMappingURL=main.css.map */
