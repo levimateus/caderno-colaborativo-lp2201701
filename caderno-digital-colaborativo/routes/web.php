@@ -14,3 +14,13 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+
+/**
+ * 
+ * https://laracasts.com/discuss/channels/eloquent/replacing-the-laravel-authentication-with-a-custom-authentication-errors
+ */
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');
