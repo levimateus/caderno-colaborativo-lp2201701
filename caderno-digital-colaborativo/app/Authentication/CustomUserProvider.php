@@ -10,6 +10,8 @@ class CustomUserProvider implements IlluminateUserProvider {
 
     /**
      * https://laracasts.com/discuss/channels/laravel/replacing-the-laravel-authentication-with-a-custom-authentication
+     * esta classe é instanciada pela 'CustomAuthProvider'e se encarrega de 
+     * verificar as credenciais de login no nosso DB
      */
     
     
@@ -86,6 +88,7 @@ class CustomUserProvider implements IlluminateUserProvider {
      */
     public function retrieveByCredentials(array $credentials) {
         // TODO: Implement retrieveByCredentials() method.
+        //verifica se existe o usuário
         
         $qry = User::where('usuario_email', '=', $credentials['email']);
 
@@ -106,6 +109,7 @@ class CustomUserProvider implements IlluminateUserProvider {
     public function validateCredentials(Authenticatable $user, array $credentials) {
         // TODO: Implement validateCredentials() method.
         // we'll assume if a user was retrieved, it's good
+        // compara a senha e o usuário (novamente)
         if ($user->usuario_email == $credentials['email'] && $user->getAuthPassword() == md5($credentials['password'] . \Config::get('constants.SALT'))) {
 
 //            $user->last_login_time = Carbon::now();

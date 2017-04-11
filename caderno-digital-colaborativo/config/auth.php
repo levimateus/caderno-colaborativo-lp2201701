@@ -73,7 +73,7 @@ return [
         
         'users' => [
             //'driver' => 'eloquent',
-            'driver' => 'custom',
+            'driver' => 'custom', //provider inventado para permitir que o guard (web) verifique as credenciais com nosso BD
             'model' => App\Authentication\User::class,
             'table' => 'usuario',
         ],
