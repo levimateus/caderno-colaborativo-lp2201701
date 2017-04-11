@@ -1,0 +1,36 @@
+//Posts
+article.post {
+	margin-bottom: 50px;
+	padding: 15px;
+	color: #1d1d1d;
+	@extend %box-shadow;
+	h4 {
+		font-weight: 700;
+		color: $df-color-dark;
+		margin: 15px 0;
+		border-bottom: 1px solid $df-color-dark;
+		padding-bottom: 3px;		
+	}
+	p {
+		margin: 10px 0;
+	}
+	a {
+		text-decoration: underline;
+		color: #1d1d1d;
+	}
+	.post-img {
+		margin-left: -15px;
+		margin-right: -15px;
+	}
+	.post-info {
+		margin-bottom: 25px;
+		font-style: italic;
+		span {
+			float: left;
+		}
+		span:last-child {
+			float: right;
+		}
+	}
+
+}

@@ -1,0 +1,20 @@
+//Mixins
+@mixin cores($fundo: '#fff', $borda: '#fff') {
+	background-color: $fundo;
+	border: 1px solid $borda;
+}
+
+//Placeholders
+%box-shadow {
+	box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.15);
+}
+
+
+//Variables
+$cinza: #f1f1f1;
+$df-color: #69B92D;
+
+//função darken do Sass utilizada pra escurecer a $df-color em 15%;
+$df-color-dark: darken($df-color, 15);
+
+$df-color-light: lighten($df-color, 20);

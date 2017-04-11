@@ -1,0 +1,101 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto:400,700");
+@import url(../css/bootstrap.min.css);
+@import url(../css/font-awesome.min.css);
+.menu, article.post, .login-page .form-signin {
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.15); }
+
+.menu {
+  background-color: #69B92D;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 10;
+  color: #fff; }
+  .menu h1,
+  .menu h2 {
+    font-weight: 700;
+    font-size: 25px;
+    margin: 9px auto; }
+  .menu h2 {
+    text-align: center; }
+  .menu span {
+    font-size: 18px;
+    float: right;
+    margin-left: 5px; }
+  .menu .fa {
+    font-size: 27px;
+    margin-right: 10px; }
+
+article.post {
+  margin-bottom: 50px;
+  padding: 15px;
+  color: #1d1d1d; }
+  article.post h4 {
+    font-weight: 700;
+    color: #467b1e;
+    margin: 15px 0;
+    border-bottom: 1px solid #467b1e;
+    padding-bottom: 3px; }
+  article.post p {
+    margin: 10px 0; }
+  article.post a {
+    text-decoration: underline;
+    color: #1d1d1d; }
+  article.post .post-img {
+    margin-left: -15px;
+    margin-right: -15px; }
+  article.post .post-info {
+    margin-bottom: 25px;
+    font-style: italic; }
+    article.post .post-info span {
+      float: left; }
+    article.post .post-info span:last-child {
+      float: right; }
+
+.login-page {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 400px;
+  height: 400px;
+  transform: translate(-50%, -50%); }
+  .login-page * {
+    border-radius: 0 !important; }
+  .login-page .form-signin {
+    max-width: 400px;
+    margin: auto;
+    padding: 15px; }
+  .login-page .form-signin-heading {
+    color: #467b1e; }
+  .login-page input[type="text"] {
+    border-bottom: 0; }
+  .login-page button {
+    background-color: #69B92D;
+    color: #fff !important;
+    border: none; }
+    .login-page button:hover, .login-page button:active, .login-page button:focus {
+      background-color: #467b1e; }
+
+body {
+  padding-top: 70px;
+  background-color: #fff;
+  position: relative;
+  font-family: 'Roboto', sans-serif; }
+
+main {
+  z-index: 5;
+  margin: auto;
+  height: 100%; }
+  main .container {
+    padding: 15px; }
+
+.ifBlock {
+  max-width: 650px;
+  margin: auto; }
+
+.centered {
+  display: flex;
+  align-items: center; }
+
+/*# sourceMappingURL=main.css.map */
