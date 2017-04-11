@@ -37,7 +37,11 @@
                                 @endif
                             </div>
                         </div>
+<<<<<<< HEAD
 <!--
+=======
+
+>>>>>>> integracao-banco-de-dados
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <div class="checkbox">
@@ -46,17 +50,28 @@
                                     </label>
                                 </div>
                             </div>
+<<<<<<< HEAD
                         </div>-->
+=======
+                        </div>
+>>>>>>> integracao-banco-de-dados
 
                         <div class="form-group">
                             <div class="col-md-8 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">
                                     Login
                                 </button>
+<<<<<<< HEAD
 <!--
                                 <a class="btn btn-link" href="{{ route('password.request') }}">
                                     Forgot Your Password?
                                 </a>-->
+=======
+
+                                <a class="btn btn-link" href="{{ route('password.request') }}">
+                                    Forgot Your Password?
+                                </a>
+>>>>>>> integracao-banco-de-dados
                             </div>
                         </div>
                     </form>
