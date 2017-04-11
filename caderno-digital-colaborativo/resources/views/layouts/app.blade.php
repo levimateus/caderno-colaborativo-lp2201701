@@ -12,6 +12,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/main.css') }}" rel="stylesheet" type="text/css"/>
 
     <!-- Scripts -->
     <script>
@@ -22,26 +23,16 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-default navbar-static-top">
+        <nav class="menu">
             <div class="container">
-                <div class="navbar-header">
-
-                    <!-- Collapsed Hamburger -->
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
-                        <span class="sr-only">Toggle Navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-
-                    <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        Caderno Colaborativo
-                    </a>
+              <div class="row centered">
+                <div class="col-md-4 col-xs-4">
+                    <h1><i class="fa fa-camera-retro"></i><b class="hidden-xs">Caderno colaborativo</b></h1>
                 </div>
-
-                <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                    <!-- Left Side Of Navbar -->
+                <div class="col-md-4 col-xs-8 page text-center">
+                    Início
+                </div>
+                <div class="col-md-4 hidden-xs text-right">
                     <ul class="nav navbar-nav">
                         &nbsp;
                     </ul>
@@ -79,10 +70,14 @@
                         @endif
                     </ul>
                 </div>
+              </div>
             </div>
         </nav>
-
-        @yield('content')
+        <main>
+            <div class="container">
+                @yield('content')
+            </div>
+        </main>
     </div>
 
     <!-- Scripts -->

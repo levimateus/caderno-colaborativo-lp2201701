@@ -77,7 +77,16 @@
                     </form>
                 </div>
             </div>
-        </div>
-    </div>
+            <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                <input id="password" type="password" class="form-control" name="password" placeholder="Insira aqui sua senha" required>
+                @if ($errors->has('password'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('password') }}</strong>
+                    </span>
+                @endif
+            </div>  
+            <button class="btn btn-lg btn-block" type="submit">Sign in</button>
+        </form>
+    </div> 
 </div>
 @endsection
