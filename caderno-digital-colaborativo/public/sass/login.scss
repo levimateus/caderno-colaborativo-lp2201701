@@ -1,0 +1,33 @@
+.login-page {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+    width: 400px;
+    height: 400px;
+	transform: translate(-50%, -50%);
+	* {
+		border-radius: 0 !important;
+	}
+	.form-signin {
+		max-width: 400px;
+		margin: auto;
+		padding: 15px;
+		@extend %box-shadow;
+	}
+	.form-signin-heading {
+		color: $df-color-dark;
+	}
+	input[type="text"] {
+		border-bottom: 0;
+	}
+	button {
+		background-color: $df-color;
+		color: #fff !important;
+		border: none;
+		&:hover,
+		&:active,
+		&:focus {
+			background-color: $df-color-dark;
+		}
+	}
+}

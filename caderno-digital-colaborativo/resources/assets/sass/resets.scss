@@ -1,0 +1,28 @@
+// Scss para coisas padrões
+body {
+	padding-top: 70px;
+	background-color: #fff;
+	position: relative;
+	font-family: 'Roboto', sans-serif;
+}
+
+main {
+	z-index: 5;
+	margin: auto;
+	height: 100%;
+	.container {
+		padding: 15px;
+	}
+}
+
+//Tamanho padrão dos blocos No Caderno colaborativo
+.ifBlock {
+	max-width: 650px;
+	margin: auto;
+}
+
+//Utilizar para centralizar elementos
+.centered {
+	display: flex;
+	align-items: center;
+}
