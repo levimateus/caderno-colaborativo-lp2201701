@@ -8,52 +8,10 @@ use App\models\dao\Iftag;
 class Usuario extends Model
 {       
     
-    protected $table      = 'usuario';	//define a tabela a ser operada
-    public    $timestamps =  false;			//desabilita a gravação de data de alteração na tabela
-
-    private function lerArquivo($f){
-        $delimitador = ';';
-        $cerca = '"';
-        
-        if ($f) {
-
-            // Ler cabecalho do arquivo
-            $cabecalho = fgetcsv($f, 0, $delimitador, $cerca);
-            // Enquanto nao terminar o arquivo
-            while (!feof($f)) {
-
-                // Ler uma linha do arquivo
-                $linha = fgetcsv($f, 0, $delimitador, $cerca);
-                if (!$linha) {
-                    continue;
-                }
-
-                // Montar registro com valores indexados pelo cabecalho
-                $registro = array_combine($cabecalho, $linha);
-
-                // Obtendo o nome
-                $listaRegistros[] = $registro;
-            }
-            fclose($f);
-        }
-        return $listaRegistros;
-    }
-
-    public function importar($f){
-        $listaRegistros = lerArquivo($f);
-
-        foreach ($listaRegistros as $registro) {
-            $linha = array(
-                    nome        => $registro['Nome'].PHP_EOL;
-                    sobrenome   => $registro['Sobrenome'].PHP_EOL;
-                    prontuario   => $registro['Prontuario'].PHP_EOL;
-                    password   => $registro['RG'].PHP_EOL;
-                    dataNasc   => $registro['DataNasc'].PHP_EOL;
-                );
-
-            inserir($linha);
-        }
-    }
+    protected $table = 'usuario';
+    public $timestamps = false;
+    protected $primaryKey = 'usuario_id';
+    
 
     /*
     **  MÉTODOS DE DEFINIÇÃO DE RELACIONAMENTO

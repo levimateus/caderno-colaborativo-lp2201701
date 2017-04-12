@@ -21,6 +21,11 @@ Route::get('/', function () {
  * 
  * https://laracasts.com/discuss/channels/eloquent/replacing-the-laravel-authentication-with-a-custom-authentication-errors
  */
-Auth::routes();
+Auth::Routes();
 
 Route::get('/home', 'HomeController@index');
+
+//rota para importação de CSV
+Route::get('/csv', 'UsuarioController@index');
+
+Route::post('/importar', 'UsuarioController@importar')->name('importar');
