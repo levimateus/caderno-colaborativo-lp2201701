@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\models\dao\Usuario;
 
 class UsuarioController extends Controller
 {
@@ -14,8 +15,10 @@ class UsuarioController extends Controller
 
 
     public function importar(Request $request){
-    	$f 				= $request->file('arquivo');
-    	$listaRegistros = $this->lerArquivo($f);
+        echo "importando";
+
+    	//$f 				= $request->file('arquivo');
+    	$listaRegistros = $this->lerArquivo(/*$f*/);
 
         foreach ($listaRegistros as $registro) {
             $linha = array(
@@ -30,7 +33,9 @@ class UsuarioController extends Controller
         }
     }
     
-   	public function lerArquivo($f){
+   	public function lerArquivo(/*$f*/){
+        $f = fopen('C:\Users\Aluno\Desktop\caderno-digital-colaborativo\listaImportar.csv', 'r');
+
         $delimitador = ';';
         $cerca = '"';
         $listaRegistros = array();
@@ -52,10 +57,13 @@ class UsuarioController extends Controller
 
                 // Obtendo o nome
                 $listaRegistros[] = $registro;
+
+
             }
             fclose($f);
         }
         return $listaRegistros;
     }
-
 }
+
+

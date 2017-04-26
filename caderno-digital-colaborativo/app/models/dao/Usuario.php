@@ -1,6 +1,6 @@
 <?php
 
-namespace App\models\dao;\
+namespace App\models\dao;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use App\models\dao\Iftag;
@@ -65,25 +65,31 @@ class Usuario extends Model
     /*  inserir novo registro
     */
 
-    public function inserir(Array $dados)
+    public static function inserir(Array $dados)
     {
+        date_default_timezone_set('Brazil/East');
         // Validate the request...
 
         $usuario = new Usuario;
 
-        $usuario->usuario_nome          = isset($dados->nome)       ? '' : $dados->nome;
-        $usuario->usuario_sobrenome     = isset($dados->sobrenome)  ? '' : $dados->sobrenome;
-        $usuario->usuario_data_nasc     = isset($dados->dataNasc)   ? '' : $dados->dataNasc;
-        $usuario->usuario_data_cadastro = $date = date('Y-m-d H:i');
-        $usuario->usuario_prontuario    = isset($dados->prontuario) ? '' : $dados->prontuario;
-        $usuario->email                 = isset($dados->email)      ? '' : $dados->email;
-        $usuario->passoword             = isset($dados->password)   ? '' : $dados->password;
-        $usuario->usuario_descricao     = isset($dados->descricao)  ? '' : $dados->descricao;
-        $usuario->usuario_cargo         = isset($dados->0)          ? '' : $dados->0;
-        $usuario->usuario_experiencia   = isset($dados->0)          ? '' : $dados->0;
-        $usuario->usuario_estado_acesso = isset($dados->0)          ? '' : $dados->0;
+        $usuario->usuario_nome          = isset($dados['nome'])       ? '' : $dados['nome'];
+        $usuario->usuario_sobrenome     = isset($dados['sobrenome'])  ? '' : $dados['sobrenome'];
+        $usuario->usuario_data_nasc     = isset($dados['dataNasc'])   ? '' : $dados['dataNasc'];
+        $usuario->usuario_data_cadastro = date('Y-m-d H:i:s');
+        $usuario->usuario_prontuario    = isset($dados['prontuario']) ? '' : $dados['prontuario'];
+        //$usuario->usuario_email         = isset($dados['email'])      ? '' : $dados['email'];
+        $usuario->usuario_senha         = isset($dados['prontuario'])   ? '' : $dados['prontuario'];
+        //$usuario->usuario_descricao     = isset($dados['descricao'])  ? '' : $dados['descricao'];
+        //$usuario->usuario_cargo         = isset($dados['cargo'])       ? '' : $dados['cargo'];
+        //$usuario->usuario_experiencia   = isset($dados['experiencia'])  ? '' : $dados['experiencia'];
+        //$usuario->usuario_estado_acesso = isset($dados['estadoAcesso'])  ? '' : $dados['estadoAcesso'];
 
-        $flight->save();
+        $usuario->usuario_cargo = 0;
+        $usuario->usuario_estado_acesso = 0;
+        $usuario->usuario_experiencia = 0;
+        $usuario->usuario_estado_acesso = 0;
+
+        $usuario->save();
     }
 
 }
