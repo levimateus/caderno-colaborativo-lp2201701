@@ -40,8 +40,7 @@
                     <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
                     <button type="submit" class="btn btn-primary">Publicar</button>
                 </div>
-                <?php echo asset("storage/".$midia->midia_href)?>
-
+                
             </form>
             
              

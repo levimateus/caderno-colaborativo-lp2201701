@@ -41,7 +41,7 @@ class PublicacaoController extends Controller
             //echo $uploadedfile->getClientOriginalName();            
             
             ////nesse comando vamos armazenar o upload e vai retornar a rota do arquivo que foi guardado.
-            $rotadoarquivo = Storage::disk('public')->put('publicacoes', $uploadedfile, 'public'); 
+            $rotadoarquivo = Storage::disk('public')->put('publicacoes', $uploadedfile); 
            
             //o arquivo é salvo com outro nome.
 
