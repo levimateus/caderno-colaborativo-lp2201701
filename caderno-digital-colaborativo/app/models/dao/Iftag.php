@@ -3,7 +3,7 @@
 namespace App\models\dao;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use App\models\dao\Publicacao;
 use App\models\dao\Usuario;
 
@@ -19,11 +19,11 @@ class Iftag extends Model
     public    $timestamps = false;		//desabilita a gravação de data na alteração na tabela
 
     //interesses
-    public function iftags(): BelongsToMany{
+    public function iftagsUsuario(): BelongsToMany{
         return $this->belongsToMany(Usuario::class,'relacionamento_interesses' , 'iftag_id', 'usuario_id');
     }
 
-    public function iftags(): BelongsToMany{
+    public function iftagsPublicacao(): BelongsToMany{
         return $this->belongsToMany(Publicacao::class, 'relacionamento_publicacao_tags', 'iftag_id', 'publicacao_id');
     }
 }

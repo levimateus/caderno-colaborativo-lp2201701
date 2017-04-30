@@ -21,7 +21,7 @@ class Denuncia extends Model
     }
 
     public function avaliador(){
-    	return $this->belongsTo('Apps\models\dao\Usuario', 'usuario_id_avaliador')
+    	return $this->belongsTo('Apps\models\dao\Usuario', 'usuario_id_avaliador');
     }
 
     public function comentario(){

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\models\dao;\
+namespace App\models\dao;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use App\models\dao\Iftag;
@@ -44,11 +44,11 @@ class Usuario extends Model
 
         foreach ($listaRegistros as $registro) {
             $linha = array(
-                    nome        => $registro['Nome'].PHP_EOL;
-                    sobrenome   => $registro['Sobrenome'].PHP_EOL;
-                    prontuario   => $registro['Prontuario'].PHP_EOL;
-                    password   => $registro['RG'].PHP_EOL;
-                    dataNasc   => $registro['DataNasc'].PHP_EOL;
+                    nome        => $registro['Nome'].PHP_EOL,
+                    sobrenome   => $registro['Sobrenome'].PHP_EOL,
+                    prontuario   => $registro['Prontuario'].PHP_EOL,
+                    password   => $registro['RG'].PHP_EOL,
+                    dataNasc   => $registro['DataNasc'].PHP_EOL,
                 );
 
             inserir($linha);
@@ -121,11 +121,12 @@ class Usuario extends Model
         $usuario->email                 = isset($dados->email)      ? '' : $dados->email;
         $usuario->passoword             = isset($dados->password)   ? '' : $dados->password;
         $usuario->usuario_descricao     = isset($dados->descricao)  ? '' : $dados->descricao;
-        $usuario->usuario_cargo         = isset($dados->0)          ? '' : $dados->0;
-        $usuario->usuario_experiencia   = isset($dados->0)          ? '' : $dados->0;
-        $usuario->usuario_estado_acesso = isset($dados->0)          ? '' : $dados->0;
-
-        $flight->save();
+//o que deveria fazer essas 3 linhas abaixo?
+//        $usuario->usuario_cargo         = isset($dados->0)          ? '' : $dados->0;
+//        $usuario->usuario_experiencia   = isset($dados->0)          ? '' : $dados->0;
+//        $usuario->usuario_estado_acesso = isset($dados->0)          ? '' : $dados->0;
+        
+        $usuario->save();
     }
 
 }
