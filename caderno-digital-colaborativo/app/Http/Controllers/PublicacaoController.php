@@ -7,6 +7,7 @@ use App\models\dao\Publicacao;
 use App\models\dao\Midia;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 class PublicacaoController extends Controller
 {
@@ -22,8 +23,8 @@ class PublicacaoController extends Controller
         $post->publicacao_tags = $request->input('tags');
         $post->publicacao_dt = Carbon::now();
         $post->publicacao_status = 1;
-        $post->usuario_id_autor = 4;
-        $post->usuario_id_professor = 3;
+        $post->usuario_id_autor = Auth::id();
+        $post->usuario_id_professor = $request->input('professor');
         $post->midia_id = $this->getObtainMedia($request);
         $post->save();
     }
