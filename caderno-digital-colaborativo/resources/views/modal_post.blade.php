@@ -3,8 +3,8 @@
         <div class="modal-content">
 
 
-        <!-- enctype="multipart/form-data" usado para fazer upload para o server -->
-        <form role="form"  method="POST" action="/post" accept-charset="UTF-8" enctype="multipart/form-data">
+            <!-- enctype="multipart/form-data" usado para fazer upload para o server -->
+            <form role="form"  method="POST" action="/post" accept-charset="UTF-8" enctype="multipart/form-data">
                 {{ csrf_field() }}
 
                 <div class="modal-header">
@@ -19,18 +19,23 @@
                     <br>
                     <label for="area" class="col-sm-2">Área</label>
                     <select name="area" id="area" class="form-control" required="required">
-                        <option value="1">1</option>
+                        <option value="ADS">ADS</option>
+                        <option value="Matematica">Matematica</option>
+                        <option value="Automacao industrial">Automacao industrial</option>
                     </select>
                     <br>
                     <label for="professor" class="col-sm-2">Professor</label>
                     <select name="professor" id="professor" class="form-control" required="required">
-                        <option value="1">1</option>
+                        <?php
+                            foreach ($professores as $user) {?>
+                                <option value="<?php echo $user->usuario_id;?>"><?php echo $user->usuario_nome;?></option>
+                            <?php }?>
                     </select>
                     <br>
                     <label for="tags" class="col-sm-2">Tags</label>
                     <input type="text" name="tags" id="inputTags" class="form-control" value="" required="required" title="">
 
-      
+
                     <label for="midia" class="col-sm-2">Mídia</label>
                     <input type="file" name="midia" id="midia" class="form-control" value="" required="required" title="">
 
@@ -40,10 +45,10 @@
                     <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
                     <button type="submit" class="btn btn-primary">Publicar</button>
                 </div>
-                
+
             </form>
-            
-             
+
+
         </div>
 
     </div>
