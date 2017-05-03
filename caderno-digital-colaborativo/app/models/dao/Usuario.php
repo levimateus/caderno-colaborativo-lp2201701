@@ -65,29 +65,29 @@ class Usuario extends Model
     /*  inserir novo registro
     */
 
-    public static function inserir(Array $dados)
+    public function inserir($dados)
     {
-        date_default_timezone_set('Brazil/East');
-        // Validate the request...
+        echo "<h1>Inserção no banco de dados</h1>";
+        echo($dados['nome']);
+        echo("<br>");
+        echo($dados['sobrenome']);
+        echo("<br>");
+        echo($dados['dataNasc']);
+        echo("<br>");
 
         $usuario = new Usuario;
 
-        $usuario->usuario_nome          = isset($dados['nome'])       ? '' : $dados['nome'];
-        $usuario->usuario_sobrenome     = isset($dados['sobrenome'])  ? '' : $dados['sobrenome'];
-        $usuario->usuario_data_nasc     = isset($dados['dataNasc'])   ? '' : $dados['dataNasc'];
-        $usuario->usuario_data_cadastro = date('Y-m-d H:i:s');
-        $usuario->usuario_prontuario    = isset($dados['prontuario']) ? '' : $dados['prontuario'];
-        //$usuario->usuario_email         = isset($dados['email'])      ? '' : $dados['email'];
-        $usuario->usuario_senha         = isset($dados['prontuario'])   ? '' : $dados['prontuario'];
-        //$usuario->usuario_descricao     = isset($dados['descricao'])  ? '' : $dados['descricao'];
-        //$usuario->usuario_cargo         = isset($dados['cargo'])       ? '' : $dados['cargo'];
-        //$usuario->usuario_experiencia   = isset($dados['experiencia'])  ? '' : $dados['experiencia'];
-        //$usuario->usuario_estado_acesso = isset($dados['estadoAcesso'])  ? '' : $dados['estadoAcesso'];
-
-        $usuario->usuario_cargo = 0;
-        $usuario->usuario_estado_acesso = 0;
-        $usuario->usuario_experiencia = 0;
-        $usuario->usuario_estado_acesso = 0;
+        $usuario->usuario_nome          = isset($dados['nome'])         ? '' : $dados['nome'];
+        $usuario->usuario_sobrenome     = isset($dados['sobrenome'])    ? '' : $dados['sobrenome'];
+        $usuario->usuario_data_nasc     = isset($dados['dataNasc'])     ? '' : $dados['dataNasc'];
+        //$usuario->usuario_data_cadastro = date('Y-m-d').'';
+        $usuario->usuario_prontuario    = isset($dados['prontuario'])   ? '' : $dados['prontuario'];
+        $usuario->usuario_email         = isset($dados['email'])        ? '' : $dados['email'];
+        $usuario->usuario_senha         = isset($dados['senha'])        ? '' : md5($dados['senha']);
+        $usuario->usuario_descricao     = isset($dados['descricao'])    ? '' : $dados['descricao'];
+        $usuario->usuario_cargo         = isset($dados['cargo'])        ? 0 : $dados['cargo'];
+        $usuario->usuario_experiencia   = isset($dados['experiencia'])  ? 0 : $dados['experiencia'];
+        $usuario->usuario_estado_acesso = isset($dados['estadoAcesso']) ? 0 : $dados['estadoAcesso'];
 
         $usuario->save();
     }

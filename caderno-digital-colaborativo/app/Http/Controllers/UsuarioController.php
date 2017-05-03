@@ -15,26 +15,38 @@ class UsuarioController extends Controller
 
 
     public function importar(Request $request){
-        echo "importando";
+        echo "<h1>Importação do post</h1>";
 
     	//$f 				= $request->file('arquivo');
     	$listaRegistros = $this->lerArquivo(/*$f*/);
-
+        echo "<h1>Essa parte é onde os dados são passados para o banco</h1>";
         foreach ($listaRegistros as $registro) {
             $linha = array(
                     'nome'       => $registro['Nome'].PHP_EOL,
                     'sobrenome'  => $registro['Sobrenome'].PHP_EOL,
                     'prontuario' => $registro['Prontuario'].PHP_EOL,
-                    'password'   => $registro['RG'].PHP_EOL,
-                    'dataNasc'   => $registro['DataNasc'].PHP_EOL,
+                    'senha'      => $registro['RG'].PHP_EOL,
+                    'dataNasc'   => implode("-",array_reverse(explode("/",$registro['DataNasc']))).PHP_EOL, 
+                    'email'      => '',
+                    'descricao'  => '',
+                    'cargo'      => 0,
+                    'experiencia' => 0,
+                    'estadoAcesso' => 0
                 );
 
-            Usuario::inserir($linha);
+            echo "<h3>Usuario</h3>";
+            echo "<pre>";
+            print_r($linha);
+            echo "</pre>";
+            echo "<br>";
+
+            $usuario = new Usuario;
+            $usuario->inserir($linha);
         }
     }
     
    	public function lerArquivo(/*$f*/){
-        $f = fopen('C:\Users\Aluno\Desktop\caderno-digital-colaborativo\listaImportar.csv', 'r');
+        $f = fopen('..\listaImportar.csv', 'r');
 
         $delimitador = ';';
         $cerca = '"';
@@ -62,6 +74,10 @@ class UsuarioController extends Controller
             }
             fclose($f);
         }
+        echo "<pre>";
+        print_r($listaRegistros);
+        echo "</pre>";
+
         return $listaRegistros;
     }
 }
