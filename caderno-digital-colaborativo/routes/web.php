@@ -23,9 +23,10 @@ Route::get('/', function () {
  */
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
+Route::get('/home', 'PublicacaoController@index');
+Route::get('/post/{postId}', 'PublicacaoController@show');
 
 Route::get('/post', 'PublicacaoController@index');//TESTE
 Route::post('/post', 'PublicacaoController@publicar');
-Route::get('/post/{id}', 'PublicacaoController@ver'); //TESTE
+//Route::get('/post/{id}', 'PublicacaoController@ver'); //TESTE
 

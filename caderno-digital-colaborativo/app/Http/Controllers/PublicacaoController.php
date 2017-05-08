@@ -8,11 +8,25 @@ use App\models\dao\Midia;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\ComentarioController;
 
 class PublicacaoController extends Controller
 {
-    public function index(){
-        //exibir esta publicão
+    public function index() {
+
+        $professores = DB::table('usuario')->where('usuario_cargo', 3)->get();
+        $comments = ComentarioController::listarTodos();
+        $posts = Publicacao::listarPosts();
+
+        return view('home', compact('posts','professores','comments'));
+    }
+
+    public function show($id) {
+        $professores = DB::table('usuario')->where('usuario_cargo', 3)->get();
+        $post = Publicacao::listarPostId($id);
+
+        return view('posts.show', compact('post','professores'));
     }
 
     public function publicar(Request $request) {
@@ -77,19 +91,13 @@ class PublicacaoController extends Controller
         //https://laravel.com/docs/5.4/eloquent-relationships#one-to-one
         $post = Publicacao::findOrFail($id);
         $midia = $post->midia;
-        echo "<br><br>$$$$$$$$$$$$$$$$$ POST $$$$$$$$$$$$$$$$\r\n<br><br>";
-        print_r($post);
-
-        echo "<br><br>$$$$$$$$$$$$$$$$$$$ MIDIA $$$$$$$$$$$$$$\r\n<br><br>";
-        print_r($midia);
-        echo "<br><br>$$$$$$$$$$$$$$$$$$$ URL DA IMAGEM $$$$$$$$$$$$$$\r\n<br><br>";
         /**
           para ver as imagens
           php artisan storage:link
          * 
          */
         echo asset("storage/".$midia->midia_href);
-        echo "<img src ='".asset("storage/".$midia->midia_href)."' />";
+        echo "<img src ='".asset("storage/app/public/publicacoes/".$midia->midia_href)."' />";
     }
 
     public function excluir() {

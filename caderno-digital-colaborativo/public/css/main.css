@@ -12,6 +12,8 @@
   left: 0;
   z-index: 10;
   color: #fff; }
+  .menu a {
+    color: #fff; }
   .menu h1,
   .menu h2 {
     font-weight: 700;
@@ -19,10 +21,12 @@
     margin: 9px auto; }
   .menu h2 {
     text-align: center; }
-  .menu span {
-    font-size: 18px;
-    float: right;
-    margin-left: 5px; }
+  .menu .dropdown {
+    text-transform: capitalize; }
+    .menu .dropdown > a:hover,
+    .menu .dropdown > a:focus,
+    .menu .dropdown > a:active {
+      background-color: #467b1e; }
   .menu .fa {
     font-size: 27px;
     margin-right: 10px; }
@@ -52,6 +56,21 @@ article.post {
       float: left; }
     article.post .post-info span:last-child {
       float: right; }
+
+#abrir_novo_post {
+  position: fixed;
+  right: 19px;
+  width: 45px;
+  height: 45px;
+  bottom: 15px;
+  font-size: 35px;
+  border-radius: 50%;
+  line-height: 31px;
+  color: #fff;
+  background-color: #69B92D;
+  border: none; }
+  #abrir_novo_post:hover {
+    background-color: #467b1e; }
 
 .login-page {
   position: fixed;
@@ -99,5 +118,7 @@ main {
 
 a {
   color: #fff; }
+  a:hover {
+    color: #fff; }
 
 /*# sourceMappingURL=main.css.map */
