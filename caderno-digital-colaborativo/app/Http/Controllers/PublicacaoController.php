@@ -24,9 +24,10 @@ class PublicacaoController extends Controller
 
     public function show($id) {
         $professores = DB::table('usuario')->where('usuario_cargo', 3)->get();
+        $comments = ComentarioController::listarTodos();
         $post = Publicacao::listarPostId($id);
 
-        return view('posts.show', compact('post','professores'));
+        return view('posts.show', compact('post','professores','comments'));
     }
 
     public function publicar(Request $request) {
