@@ -25,16 +25,16 @@ class Usuario extends Model
     }
 
     //interesses
-    public function iftags(): BelongsToMany{
+    public function iftags() {
         return $this->belongsToMany(Iftag::class,'relacionamento_interesses' , 'publicacao_id', 'iftag_id');
     }
 
     //seguidores
-      public function seguidores(): BelongsToMany{
+      public function seguidores() {
         return $this->belongsToMany(Usuario::class,'relacionamento_seguidores' , 'usuario_id_seguidor', 'usuario_id_seguindo');
     }
 
-      public function seguindo(): BelongsToMany{
+      public function seguindo() {
         return $this->belongsToMany(Usuario::class,'relacionamento_seguidores' , 'usuario_id_seguindo', 'usuario_id_seguidor');
     }
 
@@ -74,21 +74,25 @@ class Usuario extends Model
         echo("<br>");
         echo($dados['dataNasc']);
         echo("<br>");
+        
+        //validacao simples: fazer uma validacao completa
+        if($dados['nome']==""){
+            return;
+        }
 
         $usuario = new Usuario;
 
-        $usuario->usuario_nome          = isset($dados['nome'])         ? '' : $dados['nome'];
-        $usuario->usuario_sobrenome     = isset($dados['sobrenome'])    ? '' : $dados['sobrenome'];
-        $usuario->usuario_data_nasc     = isset($dados['dataNasc'])     ? '' : $dados['dataNasc'];
-        //$usuario->usuario_data_cadastro = date('Y-m-d').'';
-        $usuario->usuario_prontuario    = isset($dados['prontuario'])   ? '' : $dados['prontuario'];
-        $usuario->usuario_email         = isset($dados['email'])        ? '' : $dados['email'];
-        $usuario->usuario_senha         = isset($dados['senha'])        ? '' : md5($dados['senha']);
-        $usuario->usuario_descricao     = isset($dados['descricao'])    ? '' : $dados['descricao'];
-        $usuario->usuario_cargo         = isset($dados['cargo'])        ? 0 : $dados['cargo'];
-        $usuario->usuario_experiencia   = isset($dados['experiencia'])  ? 0 : $dados['experiencia'];
-        $usuario->usuario_estado_acesso = isset($dados['estadoAcesso']) ? 0 : $dados['estadoAcesso'];
-
+        $usuario->usuario_nome          =     utf8_decode($dados['nome']         );
+        $usuario->usuario_sobrenome     =     utf8_decode($dados['sobrenome']    );
+        $usuario->usuario_data_nasc     =     utf8_decode($dados['dataNasc']     );
+        $usuario->usuario_prontuario    =     utf8_decode($dados['prontuario']   );
+        $usuario->usuario_email         =     utf8_decode($dados['email']        );
+        $usuario->usuario_senha         = md5(utf8_decode($dados['senha'])       );
+        $usuario->usuario_descricao     =     utf8_decode($dados['descricao']    );
+        $usuario->usuario_cargo         =     utf8_decode($dados['cargo']        );
+        $usuario->usuario_experiencia   =     utf8_decode($dados['experiencia']  );
+        $usuario->usuario_estado_acesso =     utf8_decode($dados['estadoAcesso'] );
+        
         $usuario->save();
     }
 

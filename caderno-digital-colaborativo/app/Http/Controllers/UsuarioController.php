@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\models\dao\Usuario;
-
+use Carbon\Carbon;
 class UsuarioController extends Controller
 {
 
@@ -15,19 +15,22 @@ class UsuarioController extends Controller
 
 
     public function importar(Request $request){
-        echo "<h1>Importação do post</h1>";
-
-    	//$f 				= $request->file('arquivo');
-    	$listaRegistros = $this->lerArquivo(/*$f*/);
-        echo "<h1>Essa parte é onde os dados são passados para o banco</h1>";
-        foreach ($listaRegistros as $registro) {
+        echo "<h1>Importação do post</h1>"; 
+    	$f  = $request->file('arquivo'); 
+        echo $f;
+    	$listaRegistros = $this->lerArquivo($f);
+        echo "<h1>Essa parte é onde os dados são passados para o banco</h1>";        
+        foreach ($listaRegistros as $registro) {            
+            //Essa linha converte o texto em formato d/m/Y para um Date. Usamos a biblioteca Carbon. (http://carbon.nesbot.com/)
+            $datanasc = Carbon::createFromFormat('d/m/Y', $registro['DataNasc']);
             $linha = array(
-                    'nome'       => $registro['Nome'].PHP_EOL,
-                    'sobrenome'  => $registro['Sobrenome'].PHP_EOL,
-                    'prontuario' => $registro['Prontuario'].PHP_EOL,
-                    'senha'      => $registro['RG'].PHP_EOL,
-                    'dataNasc'   => implode("-",array_reverse(explode("/",$registro['DataNasc']))).PHP_EOL, 
-                    'email'      => '',
+                    'nome'       => $registro['Nome'],
+                    'sobrenome'  => $registro['Sobrenome'],
+                    'prontuario' => $registro['Prontuario'],
+                    'senha'      => $registro['RG'],
+                    'dataNasc'   => $datanasc,                     
+//                    'dataNasc'   => implode("-",array_reverse(explode("/",$registro['DataNasc']))).PHP_EOL, 
+                    'email'      => 'gu'.$registro['Prontuario'],
                     'descricao'  => '',
                     'cargo'      => 0,
                     'experiencia' => 0,
@@ -45,19 +48,18 @@ class UsuarioController extends Controller
         }
     }
     
-   	public function lerArquivo(/*$f*/){
-        $f = fopen('..\listaImportar.csv', 'r');
-
+   	public function lerArquivo($arquivo){
+        $f = fopen($arquivo, 'r');
         $delimitador = ';';
         $cerca = '"';
-        $listaRegistros = array();
+        $listaRegistros = array(); 
         if ($f) {
 
             // Ler cabecalho do arquivo
             $cabecalho = fgetcsv($f, 0, $delimitador, $cerca);
             // Enquanto nao terminar o arquivo
             while (!feof($f)) {
-
+                
                 // Ler uma linha do arquivo
                 $linha = fgetcsv($f, 0, $delimitador, $cerca);
                 if (!$linha) {

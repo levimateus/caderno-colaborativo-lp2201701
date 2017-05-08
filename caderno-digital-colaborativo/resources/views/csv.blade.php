@@ -4,7 +4,7 @@
 <br><br><br><br>
 
 
-<form action="importar" method="POST" role="form">
+<form role="form"  method="POST" action="/importar" accept-charset="UTF-8" enctype="multipart/form-data">
     {{ csrf_field() }}
     <legend>Form title</legend>
     <div class="form-group">
