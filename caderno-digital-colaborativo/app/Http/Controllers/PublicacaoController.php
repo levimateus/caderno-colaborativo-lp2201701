@@ -42,6 +42,8 @@ class PublicacaoController extends Controller
         $post->usuario_id_professor = $request->input('professor');
         $post->midia_id = $this->getObtainMedia($request);
         $post->save();
+
+        return $this->index();
     }
 
     /**
