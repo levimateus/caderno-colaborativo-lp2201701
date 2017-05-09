@@ -31,3 +31,6 @@ php artisan serve
 
 //criar estrutura de authenticacao
 php artisan make:auth
+
+//Para Criar link de rotas das imagens
+php artisan storage:link
