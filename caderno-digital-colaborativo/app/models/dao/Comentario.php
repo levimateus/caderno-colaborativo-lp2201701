@@ -14,6 +14,7 @@ class Comentario extends Model
         'uduario_id'];
 	protected $table 	  = 'comentario';	 //define a tabela a ser operada
 	public 	  $timestamps = false;			 //desabilita a gravação de data de alteração na tabela
+	protected $primaryKey = 'comentario_id'; // or null
 
     /*
     **  MÉTODOS DE DEFINIÇÃO DE RELACIONAMENTO

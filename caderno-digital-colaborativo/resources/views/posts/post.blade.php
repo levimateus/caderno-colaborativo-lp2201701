@@ -30,5 +30,13 @@
             @endif
         @endforeach
     </div>
+    <div class="row">
+        <form role="form"  method="POST" action="/comment" accept-charset="UTF-8" enctype="multipart/form-data">
+            {{ csrf_field() }}
+            <input class="col-sm-10 center-align" type="text" name="comentario" id="comentario" class="form-control" value="" required="required" title="">
+            <input class="col-sm-2" type="hidden" name="publicacao" value="{{$post->publicacao_id}}">
+            <button type="submit" class="btn btn-primary">Enviar</button>
+        </form>
+    </div>
     <span><a href="/post/{{ $post->publicacao_id }}">Saiba mais</a></span>
 </article>

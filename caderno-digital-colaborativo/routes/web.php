@@ -28,5 +28,6 @@ Route::get('/post/{postId}', 'PublicacaoController@show');
 
 Route::get('/post', 'PublicacaoController@index');//TESTE
 Route::post('/post', 'PublicacaoController@publicar');
+Route::post('/comment', 'ComentarioController@comentar');
 //Route::get('/post/{id}', 'PublicacaoController@ver'); //TESTE
 

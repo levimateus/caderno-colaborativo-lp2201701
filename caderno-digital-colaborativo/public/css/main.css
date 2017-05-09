@@ -121,4 +121,9 @@ a {
   a:hover {
     color: #fff; }
 
+.comment-date {
+  font-size: 10px;
+  text-align: right;
+}
+
 /*# sourceMappingURL=main.css.map */
