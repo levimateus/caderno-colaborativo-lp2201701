@@ -2,7 +2,7 @@
 .menu{
 	background-color: $df-color;
 	@extend %box-shadow;
-	position: absolute;
+	position: fixed;
 	top: 0;
 	right: 0;
 	left: 0;
@@ -27,6 +27,7 @@
 			a:focus,
 			a:active {
 				background-color: $df-color-dark;
+				float: right;
 			}
 		}
 	}

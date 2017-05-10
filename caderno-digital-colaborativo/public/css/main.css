@@ -2,11 +2,11 @@
 @import url(../css/bootstrap.min.css);
 @import url(../css/font-awesome.min.css);
 .menu, article.post, .login-page .form-signin {
-  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.15); }
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2); }
 
 .menu {
   background-color: #69B92D;
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 0;
   left: 0;
@@ -26,7 +26,8 @@
     .menu .dropdown > a:hover,
     .menu .dropdown > a:focus,
     .menu .dropdown > a:active {
-      background-color: #467b1e; }
+      background-color: #467b1e;
+      float: right; }
   .menu .fa {
     font-size: 27px;
     margin-right: 10px; }
@@ -35,8 +36,7 @@ article.post {
   margin-bottom: 50px;
   padding: 15px;
   color: #1d1d1d; }
-  article.post h4 {
-    font-weight: 700;
+  article.post .post-header {
     color: #467b1e;
     margin: 15px 0;
     border-bottom: 1px solid #467b1e;
@@ -46,16 +46,19 @@ article.post {
   article.post a {
     text-decoration: underline;
     color: #1d1d1d; }
-  article.post .post-img {
-    margin-left: -15px;
-    margin-right: -15px; }
   article.post .post-info {
-    margin-bottom: 25px;
+    margin: 10px 0;
     font-style: italic; }
-    article.post .post-info span {
-      float: left; }
-    article.post .post-info span:last-child {
-      float: right; }
+  article.post .post-desc {
+    border-bottom: 1px solid #467b1e; }
+  article.post .comments {
+    margin: 10px 0; }
+    article.post .comments .comment:hover {
+      background-color: #f2f2f2; }
+  article.post #comentario {
+    height: 32px;
+    padding-right: 5px;
+    margin-bottom: 10px; }
 
 #abrir_novo_post {
   position: fixed;
@@ -116,14 +119,27 @@ main {
   display: flex;
   align-items: center; }
 
+.btn-if {
+  border: none;
+  border-radius: 0;
+  background-color: #69B92D; }
+  .btn-if:hover {
+    background-color: #467b1e; }
+
+input {
+  border: none;
+  border-bottom: 1px solid #69B92D; }
+  input:hover, input:active, input:focus {
+    border-bottom: 1px solid #467b1e;
+    box-shadow: none; }
+
 a {
   color: #fff; }
   a:hover {
     color: #fff; }
 
-.comment-date {
-  font-size: 10px;
-  text-align: right;
-}
+.title {
+  font-weight: 700;
+  font-size: 17px; }
 
 /*# sourceMappingURL=main.css.map */

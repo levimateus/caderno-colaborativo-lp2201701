@@ -27,17 +27,11 @@
                         <h1><i class="fa fa-camera-retro"></i><b class="hidden-xs">Caderno colaborativo</b></h1>
                     </a>
                 </div>
-                <div class="col-md-4 col-xs-8 page text-center">
+                <div class="col-md-4 hidden-xs page text-center">
                     Oi Giovanni Fofo
                 </div>
-                <div class="col-md-4 hidden-xs text-right">
-                    <ul class="nav navbar-nav">
-                        &nbsp
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
+                <div class="col-md-4 col-xs-8 text-right">
                     <ul class="nav navbar-nav navbar-right">
-                        <!-- Authentication Links -->
                         @if (Auth::guest())
                             <li><a href="{{ route('login') }}">Login</a></li>
                             <li><a href="{{ route('register') }}">Register</a></li>
