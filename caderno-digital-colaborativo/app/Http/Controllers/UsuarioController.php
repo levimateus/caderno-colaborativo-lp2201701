@@ -8,18 +8,18 @@ use Carbon\Carbon;
 class UsuarioController extends Controller
 {
 
-	 public function index()
+	public function index()
     {
         return view('csv');
     }
 
 
     public function importar(Request $request){
-        echo "<h1>Importação do post</h1>"; 
+        echo "<h1>Importação dos usuários</h1>"; 
     	$f  = $request->file('arquivo'); 
-        echo $f;
+        //echo $f;
     	$listaRegistros = $this->lerArquivo($f);
-        echo "<h1>Essa parte é onde os dados são passados para o banco</h1>";        
+        //echo "<h1>Essa parte é onde os dados são passados para o banco</h1>";        
         foreach ($listaRegistros as $registro) {            
             //Essa linha converte o texto em formato d/m/Y para um Date. Usamos a biblioteca Carbon. (http://carbon.nesbot.com/)
             $datanasc = Carbon::createFromFormat('d/m/Y', $registro['DataNasc']);
@@ -28,8 +28,7 @@ class UsuarioController extends Controller
                     'sobrenome'  => $registro['Sobrenome'],
                     'prontuario' => $registro['Prontuario'],
                     'senha'      => $registro['RG'],
-                    'dataNasc'   => $datanasc,                     
-//                    'dataNasc'   => implode("-",array_reverse(explode("/",$registro['DataNasc']))).PHP_EOL, 
+                    'dataNasc'   => $datanasc,   
                     'email'      => 'gu'.$registro['Prontuario'],
                     'descricao'  => '',
                     'cargo'      => 0,
@@ -76,9 +75,9 @@ class UsuarioController extends Controller
             }
             fclose($f);
         }
-        echo "<pre>";
+        /*echo "<pre>";
         print_r($listaRegistros);
-        echo "</pre>";
+        echo "</pre>";*/
 
         return $listaRegistros;
     }
