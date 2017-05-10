@@ -27,6 +27,9 @@ Route::get('/home', 'PublicacaoController@index');
 Route::get('/post/{postId}', 'PublicacaoController@show');
 Route::get('/reports', 'DenunciaController@index');
 
+//rota para página de perfil
+Route::get('/perfil/{id_usuario}', 'PerfilController@index');
+
 //Route::get('/post', 'PublicacaoController@index');//TESTE
 Route::post('/post', 'PublicacaoController@publicar');
 Route::post('/comment', 'ComentarioController@comentar');
