@@ -2,15 +2,12 @@
 .menu{
 	background-color: $df-color;
 	@extend %box-shadow;
-	position: fixed;
+	position: absolute;
 	top: 0;
 	right: 0;
 	left: 0;
 	z-index: 10;
 	color: #fff;
-	a {
-		color: #fff;
-	}
 	h1,
 	h2, {
 		font-weight: 700;
@@ -20,16 +17,10 @@
 	h2 {
 		text-align: center;
 	}
-	.dropdown {
-		text-transform: capitalize;
-		> {
-			a:hover,
-			a:focus,
-			a:active {
-				background-color: $df-color-dark;
-				float: right;
-			}
-		}
+	span {
+		font-size: 18px;
+		float: right;
+		margin-left: 5px;
 	}
 	.fa {
 		font-size: 27px;

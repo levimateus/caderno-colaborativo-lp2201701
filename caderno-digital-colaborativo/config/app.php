@@ -229,6 +229,4 @@ return [
 
     ],
 
-    'Helpers'   => 'App\Http\Helpers',
-
 ];
