@@ -8,8 +8,19 @@
 
     </div>
     <div class="post-info clearfix title">
-        <span class="pull-left">AutorId: {{$post->usuario_id_autor}}</span>
-        <span class="pull-right"> Professor: {{$post->usuario_id_professor}}</span>
+        <div class="col-sm-12">
+            <span class="pull-left">AutorId: {{$post->usuario_id_autor}}</span>
+            <span class="pull-right"> Professor: {{$post->usuario_id_professor}}</span>
+        </div>
+        <div class="col-sm-3 pull-right">
+            <form role="form"  method="POST" action="/like" accept-charset="UTF-8" enctype="multipart/form-data">
+                {{ csrf_field() }}
+                <input type="hidden" name="publicacao" value="{{$post->publicacao_id}}">
+                <button  class="btn btn-default like btn-login form-control" type="submit" name="like" id="like" value="">
+                    <i class="fa fa-heart"></i>
+                </button>
+            </form>
+        </div>
     </div>
     <div class="post-desc">
         <p>Descrição:  {{$post->publicacao_descricao}}</p>
