@@ -23,7 +23,14 @@ Route::get('/', function () {
  */
 Auth::Routes();
 
-Route::get('/home', 'HomeController@index');
+Route::get('/home', 'PublicacaoController@index');
+Route::get('/post/{postId}', 'PublicacaoController@show');
+
+//Route::get('/post', 'PublicacaoController@index');//TESTE
+Route::post('/post', 'PublicacaoController@publicar');
+Route::post('/comment', 'ComentarioController@comentar');
+//Route::get('/post/{id}', 'PublicacaoController@ver'); //TESTE
+
 
 //rota para importação de CSV
 Route::get('/csv', 'UsuarioController@index');

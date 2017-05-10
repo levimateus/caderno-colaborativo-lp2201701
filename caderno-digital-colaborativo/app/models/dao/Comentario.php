@@ -6,8 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Comentario extends Model
 {
+	public      $fillable     = [
+        'comentario_conteudo', 
+        'comentario_pub_dt', 
+        'status', 
+        'publicacao_id', 
+        'uduario_id'];
 	protected $table 	  = 'comentario';	 //define a tabela a ser operada
 	public 	  $timestamps = false;			 //desabilita a gravação de data de alteração na tabela
+	protected $primaryKey = 'comentario_id'; // or null
 
     /*
     **  MÉTODOS DE DEFINIÇÃO DE RELACIONAMENTO
@@ -25,6 +32,9 @@ class Comentario extends Model
 		return $this->belongsTo('App\models\dao\Usuario', 'usuario_id');
 	}
 
+	static function listarTodos() { 
+        return Comentario::all();
+    }
 
 	
 }

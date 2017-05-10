@@ -3,6 +3,7 @@ article.post {
 	margin-bottom: 50px;
 	padding: 15px;
 	color: #1d1d1d;
+	background-color: blue;
 	@extend %box-shadow;
 	h4 {
 		font-weight: 700;
@@ -33,4 +34,19 @@ article.post {
 		}
 	}
 
+}
+
+
+//Novo Post
+#abrir_novo_post {
+	position: fixed;
+	right: 19px;
+	width: 45px;
+	height: 45px;
+	bottom: 15px;
+	font-size: 35px;
+	border-radius: 50%;
+	line-height: 31px;
+	color: #fff;
+	background-color: #69B92D;
 }
