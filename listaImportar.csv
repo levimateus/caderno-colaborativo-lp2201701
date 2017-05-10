@@ -1,5 +1,4 @@
 Nome;Sobrenome;Prontuario;RG;DataNasc
-Jose;Silva;1234567;123456;01/01/1933
 Isabela;Fernandes;73516;67361308;02/02/1990
 Isabelle;Santos;80732;59350530;19/11/1996
 Leila;Carvalho;61248;63689081;26/01/1985
@@ -100,3 +99,4 @@ Sophia;Barros;65605;13926944;15/10/1994
 Anna;Silva;12876;86950662;06/01/1998
 Bianca;Fernandes;83920;44903006;12/02/1990
 Melissa;Costa;38155;28025617;08/09/1990
+;;;;
