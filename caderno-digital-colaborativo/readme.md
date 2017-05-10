@@ -11,7 +11,7 @@ https://getcomposer.org/download/
 
 // Acessar a pasta do projeto laravel, dentro dela abrir um GITBASH e executar
 
-composer install --prefer-source
+composer install
 - aqui pode demorar, vai baixar as dependencias 
 
 php artisan --version 
