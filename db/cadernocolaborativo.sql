@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.5.2
--- https://www.phpmyadmin.net/
+-- version 4.5.1
+-- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 30-Abr-2017 às 23:02
--- Versão do servidor: 10.1.21-MariaDB
--- PHP Version: 5.6.30
+-- Generation Time: 12-Maio-2017 às 17:16
+-- Versão do servidor: 10.1.19-MariaDB
+-- PHP Version: 7.0.13
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -139,7 +139,7 @@ CREATE TABLE `usuario` (
   `usuario_data_nasc` date DEFAULT NULL,
   `usuario_data_cadastro` datetime DEFAULT NULL,
   `usuario_prontuario` varchar(8) NOT NULL,
-  `usuario_email` varchar(50) DEFAULT NULL,
+  `usuario_email` varchar(50) NOT NULL,
   `usuario_senha` varchar(41) NOT NULL,
   `usuario_descricao` varchar(140) NOT NULL,
   `usuario_cargo` tinyint(1) NOT NULL,
@@ -160,12 +160,23 @@ INSERT INTO `usuario` (`usuario_id`, `usuario_nome`, `usuario_sobrenome`, `usuar
 -- Indexes for dumped tables
 --
 
-INSERT INTO `usuario` (`usuario_id`, `usuario_nome`, `usuario_sobrenome`, `usuario_data_nasc`, `usuario_data_cadastro`, `usuario_prontuario`, `usuario_email`, `usuario_senha`, `usuario_descricao`, `usuario_cargo`, `usuario_experiencia`, `usuario_estado_acesso`, `media_id`, `remember_token`) VALUES
-(1, 'Jose', 'Silva', '1997-05-09 00:00:00', '2017-05-09 00:00:00', '1234567', 'email@email.com', 'e10adc3949ba59abbe56e057f20f883e', NULL, 0, 0, 0, NULL, NULL);
+--
+-- Indexes for table `comentario`
+--
+ALTER TABLE `comentario`
+  ADD PRIMARY KEY (`comentario_id`),
+  ADD KEY `fk_publicacao_comentario` (`publicacao_id`),
+  ADD KEY `fk_usuario_comentario` (`usuario_id`);
 
 --
--- Indexes for dumped tables
+-- Indexes for table `denuncia`
 --
+ALTER TABLE `denuncia`
+  ADD PRIMARY KEY (`denuncia_id`),
+  ADD KEY `fk_denuncia_autor` (`usuario_id_autor`),
+  ADD KEY `fk_denuncia_avaliador` (`usuario_id_avaliador`),
+  ADD KEY `fk_publicacao` (`publicacao_id`),
+  ADD KEY `fk_comentario` (`comentario_id`);
 
 --
 -- Indexes for table `iftag`
