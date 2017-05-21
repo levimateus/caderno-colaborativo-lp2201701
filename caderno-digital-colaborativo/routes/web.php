@@ -29,6 +29,8 @@ Route::get('/reports', 'DenunciaController@index');
 
 //rota para página de perfil
 Route::get('/perfil/{id_usuario}', 'PerfilController@index');
+Route::get('/perfil/', 'PerfilController@index');
+Route::post('/perfil/trocarFoto', 'PerfilController@trocarFoto');
 
 //Route::get('/post', 'PublicacaoController@index');//TESTE
 Route::post('/post', 'PublicacaoController@publicar');

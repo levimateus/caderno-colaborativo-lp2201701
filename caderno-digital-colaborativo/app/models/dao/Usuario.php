@@ -20,10 +20,61 @@ class Usuario extends Model
     /*  Referencia...
     */
 
-	public function fotoPerfil(){
-    	return $this->hasOne('App\models\dao\Midia');
+    private function lerArquivo($f){
+        $delimitador = ';';
+        $cerca = '"';
+        
+        if ($f) {
+
+            // Ler cabecalho do arquivo
+            $cabecalho = fgetcsv($f, 0, $delimitador, $cerca);
+            // Enquanto nao terminar o arquivo
+            while (!feof($f)) {
+
+                // Ler uma linha do arquivo
+                $linha = fgetcsv($f, 0, $delimitador, $cerca);
+                if (!$linha) {
+                    continue;
+                }
+
+                // Montar registro com valores indexados pelo cabecalho
+                $registro = array_combine($cabecalho, $linha);
+
+                // Obtendo o nome
+                $listaRegistros[] = $registro;
+            }
+            fclose($f);
+        }
+        return $listaRegistros;
     }
 
+    public function importar($f){
+        $listaRegistros = lerArquivo($f);
+
+        foreach ($listaRegistros as $registro) {
+            $linha = array(
+                    nome        => $registro['Nome'].PHP_EOL,
+                    sobrenome   => $registro['Sobrenome'].PHP_EOL,
+                    prontuario   => $registro['Prontuario'].PHP_EOL,
+                    password   => $registro['RG'].PHP_EOL,
+                    dataNasc   => $registro['DataNasc'].PHP_EOL,
+                );
+
+            inserir($linha);
+        }
+    }
+
+    /*
+    **  MÉTODOS DE DEFINIÇÃO DE RELACIONAMENTO
+    */
+
+    /*  Referencia...
+    */
+
+    public function fotoPerfil(){
+        return $this->hasOne('App\models\dao\Midia', 'midia_id', 'media_id');
+    }
+    
     //interesses
     public function iftags() {
         return $this->belongsToMany(Iftag::class,'relacionamento_interesses' , 'publicacao_id', 'iftag_id');
