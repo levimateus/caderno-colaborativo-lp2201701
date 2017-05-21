@@ -7,9 +7,12 @@
 		{{-- foto de perfil --}}
 		<div class="col-lg-4 col-sm-6 text-center">
 			<div class="pull-left">
-				<img class="img-circle img-responsive img-center" src="http://placehold.it/200x200" alt="">
-				<h3>John Smith</h3>
+                            <img class="img-circle img-responsive img-center"  width="200" src="{{$fotoPerfil}}" alt="">
+				<h3>{{$usuario->usuario_nome}}</h3>
+                                <button type="button" class="btn glyphicon glyphicon-picture" id="" data-toggle="modal" data-target=".perfil-foto-modal-lg"></button>
 			</div>
+                    
+                    
 		</div>
 		{{-- foto de perfil --}}
 		<div class="items">
@@ -62,9 +65,14 @@
 			</div>
 			{{-- segundo painel --}}
 		</div>
+                
 	</div>
 
 
 </div>
 
+
+    <div class="">
+        @include('perfil/modal_foto')
+    </div>
 @endsection

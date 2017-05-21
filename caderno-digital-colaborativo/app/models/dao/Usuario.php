@@ -11,6 +11,8 @@ class Usuario extends Model
     protected $table      = 'usuario';	//define a tabela a ser operada
     public    $timestamps =  false;			//desabilita a gravação de data de alteração na tabela
 
+    protected $primaryKey = 'usuario_id';
+
     private function lerArquivo($f){
         $delimitador = ';';
         $cerca = '"';
@@ -62,21 +64,21 @@ class Usuario extends Model
     /*  Referencia...
     */
 
-	public function fotoPerfil(){
-    	return $this->hasOne('App\models\dao\Midia');
+    public function fotoPerfil(){
+        return $this->hasOne('App\models\dao\Midia', 'midia_id', 'media_id');
     }
 
     //interesses
-    public function iftags(): BelongsToMany{
+    public function iftags(){
         return $this->belongsToMany(Iftag::class,'relacionamento_interesses' , 'publicacao_id', 'iftag_id');
     }
 
     //seguidores
-      public function seguidores(): BelongsToMany{
+      public function seguidores(){
         return $this->belongsToMany(Usuario::class,'relacionamento_seguidores' , 'usuario_id_seguidor', 'usuario_id_seguindo');
     }
 
-      public function seguindo(): BelongsToMany{
+      public function seguindo(){
         return $this->belongsToMany(Usuario::class,'relacionamento_seguidores' , 'usuario_id_seguindo', 'usuario_id_seguidor');
     }
 
