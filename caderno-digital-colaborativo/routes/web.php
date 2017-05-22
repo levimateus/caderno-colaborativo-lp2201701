@@ -34,5 +34,6 @@ Route::post('/perfil/trocarFoto', 'PerfilController@trocarFoto');
 //Route::get('/post', 'PublicacaoController@index');//TESTE
 Route::post('/post', 'PublicacaoController@publicar');
 Route::post('/comment', 'ComentarioController@comentar');
+Route::post('/usuario/trocasenha', 'UsuarioController@trocasenha');
 //Route::get('/post/{id}', 'PublicacaoController@ver'); //TESTE
 
