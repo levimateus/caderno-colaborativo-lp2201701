@@ -19,9 +19,9 @@ class PerfilController extends Controller {
     {
         $this->middleware('auth');
     }
-    
-    public function index($id_usuario = 0) {        
-        
+
+    public function index($id_usuario = 0) {
+
         //Se o usuario nao eh espeficado no /perfil/{usuario_id} pegamos o usuario autenticado        
         if($id_usuario == 0){
             $id_usuario = Auth::id();
@@ -48,20 +48,20 @@ class PerfilController extends Controller {
         $usuario_id = Auth::id();
         //obtemos o usuario do formulario de trocarFoto
         $usuario = Usuario::find($usuario_id);
-        
+
         //modificamos o campo media_id com o gerado pelo upload
         $usuario->media_id = $this->getObtainMedia($request);
-        
+
         //finalmente salvamos
         $usuario->save();
-        
+
         //redireccionando para tela de perfil
         return redirect('perfil');
     }
 
     private function getObtainMedia($request) {
         $uploadedfile = $request->file('foto'); //modificamos para bater com o formulario de trocar foto        
-        
+
         if ($uploadedfile->isValid()) {
 
             //dados do arquivo subido http://api.symfony.com/3.0/Symfony/Component/HttpFoundation/File/UploadedFile.html 

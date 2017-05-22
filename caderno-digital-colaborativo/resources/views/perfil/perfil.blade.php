@@ -2,6 +2,10 @@
 
 @section('content')
 
+@if(Session::has('message'))
+{!! MessageHelper::displayAlert() !!}
+@endif
+
 <div class="panel panel-default">
 	<div class="panel-body">
 		{{-- foto de perfil --}}
@@ -10,6 +14,7 @@
                             <img class="img-circle img-responsive img-center"  width="200" src="{{$fotoPerfil}}" alt="">
 				<h3>{{$usuario->usuario_nome}}</h3>
                                 <button type="button" class="btn glyphicon glyphicon-picture" id="" data-toggle="modal" data-target=".perfil-foto-modal-lg"></button>
+                                <button type="button" class="btn glyphicon glyphicon-lock" id="" data-toggle="modal" data-target=".perfil-trocasenha-modal-lg"></button>
 			</div>
                     
                     
@@ -75,4 +80,9 @@
     <div class="">
         @include('perfil/modal_foto')
     </div>
+
+    <div class="">
+        @include('perfil/modal_trocasenha')
+    </div>
+
 @endsection
