@@ -1,4 +1,4 @@
-<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+<div class="modal fade bs-example-modal-lg newPost" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
 
@@ -26,10 +26,9 @@
                     <br>
                     <label for="professor" class="col-sm-2">Professor</label>
                     <select name="professor" id="professor" class="form-control" required="required">
-                        <?php
-                            foreach ($professores as $user) {?>
-                                <option value="<?php echo $user->usuario_id;?>"><?php echo $user->usuario_nome;?></option>
-                            <?php }?>
+                        @foreach($professores as $prof)
+                             <option value="{{$prof->usuario_id}}">{{$prof->usuario_nome}}</option>
+                        @endforeach
                     </select>
                     <br>
                     <label for="tags" class="col-sm-2">Tags</label>
