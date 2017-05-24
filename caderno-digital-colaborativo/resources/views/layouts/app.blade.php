@@ -68,10 +68,6 @@
         </main>
     </div>
 
-    <div class="modal_post">
-        @include('modal_post')
-    </div>
-
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
 </body>
