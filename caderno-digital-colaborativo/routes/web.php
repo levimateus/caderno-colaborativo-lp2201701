@@ -31,3 +31,4 @@ Route::post('/post', 'PublicacaoController@publicar');
 Route::post('/comment', 'ComentarioController@comentar');
 //Route::get('/post/{id}', 'PublicacaoController@ver'); //TESTE
 
+Route::post('/like', 'LikeController@inserir');
