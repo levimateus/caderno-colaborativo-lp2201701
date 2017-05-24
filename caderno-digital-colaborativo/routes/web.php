@@ -37,3 +37,4 @@ Route::post('/report', 'DenunciaController@novaDenuncia');
 Route::get('/csv', 'UsuarioController@index');
 
 Route::post('/importar', 'UsuarioController@importar')->name('importar');
+Route::post('/like', 'LikeController@inserir');

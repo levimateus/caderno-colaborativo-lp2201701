@@ -4,30 +4,33 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\models\dao\Publicacao;
+use App\models\dao\Comentario;
 use App\models\dao\Midia;
+use App\models\dao\Like;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use App\Http\Controllers\ComentarioController;
+use Illuminate\Database\Eloquent\Builder;
 
 class PublicacaoController extends Controller
 {
     public function index() {
 
         $professores = DB::table('usuario')->where('usuario_cargo', 3)->get();
-        $comments = ComentarioController::listarTodos();
+        $comments = Comentario::listarTodos();
         $posts = Publicacao::listarPosts();
 
-        return view('home', compact('posts','professores','comments'));
+        return view('home', compact('posts','professores','comments', 'likes'));
     }
 
     public function show($id) {
         $professores = DB::table('usuario')->where('usuario_cargo', 3)->get();
         $comments = ComentarioController::listarTodos();
         $post = Publicacao::listarPostId($id);
+        $like = LikeController::verificaLike($id);
 
-        return view('posts.show', compact('post','professores','comments'));
+        return view('posts.show', compact('post','professores','comments', 'like'));
     }
 
     public function publicar(Request $request) {
