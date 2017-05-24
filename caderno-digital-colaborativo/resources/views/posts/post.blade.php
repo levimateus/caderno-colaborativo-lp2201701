@@ -1,6 +1,26 @@
 <article class="post ifBlock">
     <div class="post-header clearfix title"> 
         <span class="pull-left">#{{$post->publicacao_id}}</span>
+        <span class="dropdown pull-right">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                <span class="caret"></span>
+            </a>
+
+            <ul class="dropdown-menu" role="menu">
+                <li>
+                    <a 
+                        type="button" 
+                        class="pull-right" 
+                        id="abrir_report" 
+                        data-toggle="modal" 
+                        data-target=".newReport.post{{$post->publicacao_id}}"
+                    >
+                        Denunciar <i class="fa fa-bullhorn" aria-hidden="true"></i>
+                    </a>
+                </li>
+            </ul>
+        </span>
+
         <span class="pull-right">{{$post->publicacao_dt}} </span>
     </div>
     <div class="post-img">
@@ -12,7 +32,9 @@
         <span class="pull-right"> Professor: {{$post->usuario_id_professor}}</span>
     </div>
     <div class="post-desc">
-        <p>Descrição:  {{$post->publicacao_descricao}}</p>
+        <p>
+            Descrição:  {{$post->publicacao_descricao}}
+        </p>
     </div>
     <div class="comments">
         @foreach($comments as $comment)
@@ -32,3 +54,7 @@
     </form>
     <span><a href="/post/{{ $post->publicacao_id }}">Saiba mais</a></span>
 </article>
+
+<div class="report">
+    @include('report.report')
+</div>
