@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto:400,700");
 @import url(../css/bootstrap.min.css);
 @import url(../css/font-awesome.min.css);
-.menu, article.post, .login-page .form-signin {
+.menu, article.post, .login-page .form-signin, .report {
   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2); }
 
 .menu {
@@ -126,6 +126,14 @@ main {
   .btn-if:hover {
     background-color: #467b1e; }
 
+.btn-if-down {
+  border: none;
+  border-radius: 0;
+  background-color: #cc0000;
+  color: #fff !important; }
+  .btn-if-down:hover {
+    background-color: #7f0000; }
+
 input {
   border: none;
   border-bottom: 1px solid #69B92D; }
@@ -141,5 +149,12 @@ a {
 .title {
   font-weight: 700;
   font-size: 17px; }
+
+.report {
+  margin-bottom: 50px;
+  padding: 15px;
+  color: #1d1d1d; }
+  .report .btn-if i {
+    color: #fff; }
 
 /*# sourceMappingURL=main.css.map */

@@ -36,6 +36,16 @@ main {
 		background-color: $df-color-dark;
 	}
 }
+//botões da cor do IF negativo
+.btn-if-down {
+	border: none;
+	border-radius: 0;
+	background-color: #cc0000;
+	color: #fff !important;
+	&:hover {
+		background-color: #7f0000;
+	}
+}
 
 //Inputs
 input {

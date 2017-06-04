@@ -3,6 +3,7 @@
 namespace App\models\dao;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 
 class Like extends Model
 {
@@ -10,7 +11,7 @@ class Like extends Model
 		'uduario_id',
 		'publicacao_id',
 		'comentario_id']; 
-	protected $table 	  = 'like_relacionamento';	 //define a tabela a ser operada
+	protected $table 	  = 'likes_relacionamento';	 //define a tabela a ser operada
 	public 	  $timestamps = false;			 //desabilita a gravação de data de alteração na tabela
 
     /*

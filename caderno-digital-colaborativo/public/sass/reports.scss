@@ -1,0 +1,9 @@
+.report {
+	margin-bottom: 50px;
+	padding: 15px;
+	color: #1d1d1d;
+	@extend %box-shadow;
+	.btn-if i {
+		color: #fff;
+	}
+}

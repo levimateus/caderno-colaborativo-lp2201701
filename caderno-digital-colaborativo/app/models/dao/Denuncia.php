@@ -6,8 +6,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Denuncia extends Model
 {
-    protected $table = 'denuncia'; //define a tabela a ser operada
-    public    $timestamps = false; //desabilita a gravação de data na alteração na tabela
+    public      $fillable     = [
+        'denuncia_motivo', 
+        'denuncia_dt', 
+        'usuario_id_autor', 
+        'usuario_id_avaliador', 
+        'publicacao_id', 
+        'comentario_id'];
+    protected   $table        = 'denuncia';   //define a tabela a ser operada
+    public      $timestamps   =  false;     //desabilita a gravação de data de alteração na tabela
+    protected $primaryKey = 'denuncia_id';
 
     /*
     **  MÉTODOS DE DEFINIÇÃO DE RELACIONAMENTO
