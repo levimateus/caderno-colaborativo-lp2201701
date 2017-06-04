@@ -15,6 +15,9 @@
             'csrfToken' => csrf_token(),
         ]) !!};
     </script>
+
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}"></script>
 </head>
 
 <body>
@@ -63,12 +66,34 @@
         </nav>
         <main>
             <div class="container">
+                @if(!empty(session('message')))
+                <script type="text/javascript">
+                    $(window).on('load',function(){
+                        $('#abelinha').modal('show');
+                    });
+                </script>
+                <div class="modal fade" id="abelinha">
+                    <div class="modal-dialog  modal-md">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <a class="close" data-dismiss="modal">×</a>
+                                <h3>Mensagem</h3>
+                            </div>
+                            <div class="modal-body">
+                                <h4>
+                                    {{ session('message') }}
+                                </h4>
+                            </div>
+                            <div class="modal-footer">
+                                <a href="#" class="btn btn-primary" data-dismiss="modal">Fechar mensagem</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @endif
                 @yield('content')
             </div>
         </main>
     </div>
-
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>

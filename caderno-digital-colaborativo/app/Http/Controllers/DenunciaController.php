@@ -21,8 +21,12 @@ class DenunciaController extends Controller
         $report->publicacao_id = $request->input('publicacao_id');
         $report->comentario_id = $request->input('comentario_id');
 
-        $report->save();
+        if ($report->save()) {
+            $message = "Denuncia enviada com sucesso! :)";
+        } else {
+            $message = "Ocorreu um erro inesperado! :(";
+        }
 
-        return redirect('home');
+        return redirect('home')->with('message', $message);
     }
 }
