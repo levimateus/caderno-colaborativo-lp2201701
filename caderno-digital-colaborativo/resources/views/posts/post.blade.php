@@ -67,5 +67,5 @@
 </article>
 
 <div class="report">
-    @include('report.report')
+    @include('report.reportModal')
 </div>

@@ -25,6 +25,7 @@ Auth::Routes();
 
 Route::get('/home', 'PublicacaoController@index');
 Route::get('/post/{postId}', 'PublicacaoController@show');
+Route::get('/reports', 'DenunciaController@index');
 
 //Route::get('/post', 'PublicacaoController@index');//TESTE
 Route::post('/post', 'PublicacaoController@publicar');
