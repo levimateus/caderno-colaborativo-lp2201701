@@ -31,8 +31,8 @@ class LikeController extends Controller
         }
     }
 
-    static function verificaLike($idPublicacao = null, $idComentario = null) {
-        $existing_like = Like::where('publicacao_id', $request->input('publicacao'))->where('usuario_id', Auth::id())->first();
+    static function verificaLike( $idPublicacao = null, $idComentario = null) {
+        $existing_like = Like::where('publicacao_id', $idPublicacao)->where('usuario_id', Auth::id())->first();
 
         if ($existing_like) {
             return 'liked';
