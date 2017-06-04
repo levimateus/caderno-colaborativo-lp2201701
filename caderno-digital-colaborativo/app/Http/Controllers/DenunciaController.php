@@ -27,6 +27,12 @@ class DenunciaController extends Controller
         }
     }
 
+    public function bloquear($id) {
+        $report = new Report;
+        $data = $collection->get();
+        $collection->update(array("status" => "sent"));
+    }
+
 
     public function novaDenuncia(Request $request) {
         $report = new Denuncia;
