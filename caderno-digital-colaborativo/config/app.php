@@ -177,6 +177,10 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        
+        
+        //Providers para ajuda
+        App\Providers\HelperServiceProvider::class,
 
     ],
 

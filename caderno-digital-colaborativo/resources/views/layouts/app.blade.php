@@ -51,6 +51,9 @@
 
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
+                                        <a href="{{'/perfil/'.Auth::user()->usuario_id }}">Meu Perfil</a>
+                                    </li>
+                                    <li>
                                         <a href="/reports">Denuncias</a>
                                     </li>
                                     <li>
