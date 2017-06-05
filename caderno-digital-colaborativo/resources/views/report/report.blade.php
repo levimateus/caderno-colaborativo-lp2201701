@@ -9,29 +9,36 @@
         </p>
     </div>
 
-    <form role="form"  method="POST" action="/report/block/{{ $report->denuncia_id }}" accept-charset="UTF-8" enctype="multipart/form-data">
+    <form role="form"  method="POST" action="/report/block" accept-charset="UTF-8" enctype="multipart/form-data">
         {{ csrf_field() }}
-        @if ($report->publicacao_id)
-            <input type="hidden" name="id" value="{{$report->publicacao_id}}">
-        @else
-            <input type="hidden" name="id" value="{{$report->comentario_id}}">
-        @endif
-
         <button type="submit" class="btn btn-if" data-toggle="tooltip" title="Bloquear Publicação">
             <i class="fa fa-lock" aria-hidden="true"></i>
         </button>
+
+        @if ($report->publicacao_id)
+            <span>Bloquear publicação!</span>
+            <input type="hidden" name="id" value="{{$report->publicacao_id}}">
+        @else
+            <span>Bloquear comentário!</span>
+            <input type="hidden" name="id" value="{{$report->comentario_id}}">
+        @endif
+        <input type="hidden" name="report" value="{{$report->denuncia_id}}">
     </form>
 
-    <form role="form"  method="POST" action="/report/discard/{{ $report->denuncia_id }}" accept-charset="UTF-8" enctype="multipart/form-data">
+    <form role="form"  method="POST" action="/report/discard" accept-charset="UTF-8" enctype="multipart/form-data">
         {{ csrf_field() }}
+        <button class="btn btn-if-down" data-toggle="tooltip" title="Descartar denuncia">
+            <i class="fa fa-trash-o" aria-hidden="true"></i>
+        </button>
+
         @if ($report->publicacao_id)
             <input type="hidden" name="id" value="{{$report->publicacao_id}}">
         @else
             <input type="hidden" name="id" value="{{$report->comentario_id}}">
         @endif
-        <button class="btn btn-if-down" data-toggle="tooltip" title="Descartar denuncia">
-            <i class="fa fa-trash-o" aria-hidden="true"></i>
-        </button>
+        <input type="hidden" name="report" value="{{$report->denuncia_id}}">
+
+        <span>Descartar Denúncia!</span>
     </form>
     <span><a href="/post/{{ $report->denuncia_id }}">Saiba mais</a></span>
 </article>

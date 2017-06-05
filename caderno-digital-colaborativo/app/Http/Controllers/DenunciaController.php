@@ -20,17 +20,39 @@ class DenunciaController extends Controller
 
         if (!empty($professor[0])) {
             $reports = DB::table('denuncia')->where('usuario_id_avaliador', Auth::id())->get();
-            return view('report.reports', compact('reports'));
+            if (!empty($reports[0])) {
+
+                return view('report.reports', compact('reports'));
+            } else {
+                $message = "Opa! :( Não há nenhuma denuncia para ser avaliada.";
+
+                return redirect('home')->with('message', $message);
+            }
         } else {
             $message = "Opa! :( parece que você não é um professor";
             return redirect('home')->with('message', $message);
         }
     }
 
-    public function bloquear($id) {
-        $report = new Report;
-        $data = $collection->get();
-        $collection->update(array("status" => "sent"));
+    public function bloquear(Request $request) {
+        $message = "Opa! :( ainda não criei esse método, by: Luís Takahashi";
+        return redirect('reports')->with('message', $message);
+    }
+
+    public function descartar(Request $request) {
+
+        $reportId = $request->input('report');
+
+        $updateReport = DB::table('denuncia')
+                            ->where('denuncia_id', $reportId )
+                            ->update(array("status" => 2));
+        if ($updateReport) {
+            $message = "\o/ Denuncia descartada com sucesso!";
+            return redirect('reports')->with('message', $message);
+        } else {
+            $message = "Opa! :( ocorreu uma falha inesperada";
+            return redirect('reports')->with('message', $message);
+        }
     }
 
 
