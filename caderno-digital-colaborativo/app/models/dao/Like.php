@@ -22,9 +22,9 @@ class Like extends Model
 		return $this->belongsTo('Apps\models\dao\Denuncia');
 	}
 
-	static function listarTodos() { 
-        return Comentario::all();
-    }
+	static function listarLikes() { 
+		return Like::all();
+	}
 
 	
 }
