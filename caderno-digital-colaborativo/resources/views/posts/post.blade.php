@@ -37,7 +37,25 @@
                 {{ csrf_field() }}
                 <input type="hidden" name="publicacao" value="{{$post->publicacao_id}}">
                 <button  class="btn btn-default like btn-login form-control" type="submit" name="like" id="like" value="">
-                    <i class="fa fa-heart"></i>
+                    @php
+                        $contagemLike = 0;
+                        $liked = '';
+                    @endphp
+                    @if (count($likes) > 0)
+                        @foreach ($likes as $like)
+                            @if ($like->publicacao_id == $post->publicacao_id and $like->comentario_id == null)
+                                {{$contagemLike + 1}}
+                            @endif
+                        @endforeach
+                        @foreach ($likes as $like)
+                            @if($idUser == $like->usuario_id and $like->comentario_id == null and $like->publicacao_id == $post->publicacao_id)
+                                @php
+                                    $liked = 'liked'
+                                @endphp
+                            @endif
+                        @endforeach
+                    @endif
+                    <i class="fa {{$liked}} fa-heart"></i>
                 </button>
             </form>
         </div>
