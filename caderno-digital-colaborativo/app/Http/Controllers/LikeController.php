@@ -14,10 +14,18 @@ class LikeController extends Controller
 {
     public function inserir(Request $request) {
 
-        $existing_like = Like::where('publicacao_id', $request->input('publicacao'))->where('usuario_id', Auth::id())->first();
+        if ($request->input('comentario')) {
+            $existing_like = Like::where('comentario_id', $request->input('comentario'))->where('usuario_id', Auth::id())->first();
+        } elseif ($request->input('publicacao')) {
+            $existing_like = Like::where('publicacao_id', $request->input('publicacao'))->where('usuario_id', Auth::id())->first();
+        }
 
         if ($existing_like) {
-            Like::where('publicacao_id', $request->input('publicacao'))->where('usuario_id', Auth::id())->delete();
+            if ($request->input('comentario')) {
+                Like::where('comentario_id', $request->input('comentario'))->where('usuario_id', Auth::id())->delete();
+            } elseif ($request->input('publicacao')) {
+                Like::where('publicacao_id', $request->input('publicacao'))->where('usuario_id', Auth::id())->delete();
+            }
 
             return redirect('home/');
         } else {
@@ -28,14 +36,6 @@ class LikeController extends Controller
             $coment->save();
 
             return redirect('home/');
-        }
-    }
-
-    static function verificaLike( $idPublicacao = null, $idComentario = null) {
-        $existing_like = Like::where('publicacao_id', $idPublicacao)->where('usuario_id', Auth::id())->first();
-
-        if ($existing_like) {
-            return 'liked';
         }
     }
 }

@@ -20,17 +20,20 @@ class PublicacaoController extends Controller
         $professores = DB::table('usuario')->where('usuario_cargo', 3)->get();
         $comments = Comentario::listarTodos();
         $posts = Publicacao::listarPosts();
+        $likes = Like::listarLikes();
+        $idUser = Auth::id();
 
-        return view('home', compact('posts','professores','comments', 'likes'));
+        return view('home', compact('posts','professores','comments', 'likes', 'idUser'));
     }
 
     public function show($id) {
         $professores = DB::table('usuario')->where('usuario_cargo', 3)->get();
         $comments = ComentarioController::listarTodos();
         $post = Publicacao::listarPostId($id);
-        $like = LikeController::verificaLike($id);
+        $likes = Like::listarLikes();
+        $idUser = Auth::id();
 
-        return view('posts.show', compact('post','professores','comments', 'like'));
+        return view('posts.show', compact('post','professores','comments', 'likes', 'idUser'));
     }
 
     public function publicar(Request $request) {
