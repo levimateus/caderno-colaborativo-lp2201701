@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="{{ config('app.locale') }}">
 <head>
@@ -53,9 +52,17 @@
                                     <li>
                                         <a href="{{'/perfil/'.Auth::user()->usuario_id }}">Meu Perfil</a>
                                     </li>
-                                    <li>
-                                        <a href="/reports">Denuncias</a>
-                                    </li>
+
+                                    @if (Auth::user()->usuario_cargo == 3 || Auth::user()->usuario_cargo == 2)
+                                        <li>
+                                            <a href="/reports">Denuncias</a>
+                                        </li>
+                                    @endif
+                                    @if (Auth::user()->usuario_cargo == 2)
+                                        <li>
+                                            <a href="/csv">Importar usuários</a>
+                                        </li>
+                                    @endif
                                     <li>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();

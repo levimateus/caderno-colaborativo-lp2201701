@@ -7,7 +7,10 @@ use App\models\dao\Iftag;
 
 class Usuario extends Model
 {       
-    
+    const ALUNO = 0;
+    const ADMINISTRADOR 2;
+    const PROFESSOR = 3;
+
     protected $table      = 'usuario';
     public    $timestamps = false;
     protected $primaryKey = 'usuario_id';
