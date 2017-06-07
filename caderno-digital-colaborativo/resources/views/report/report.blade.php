@@ -27,7 +27,7 @@
             <input type="hidden" name="postId" value="{{$report->publicacao_id}}">
         @else
             <span>Bloquear comentário!</span>
-            <input type="hidden" name="postId" value="{{$report->comentario_id}}">
+            <input type="hidden" name="comentId" value="{{$report->comentario_id}}">
         @endif
         <input type="hidden" name="report" value="{{$report->denuncia_id}}">
     </form>
@@ -41,7 +41,7 @@
         @if ($report->publicacao_id)
             <input type="hidden" name="postId" value="{{$report->publicacao_id}}">
         @else
-            <input type="hidden" name="postId" value="{{$report->comentario_id}}">
+            <input type="hidden" name="comentId" value="{{$report->comentario_id}}">
         @endif
         <input type="hidden" name="report" value="{{$report->denuncia_id}}">
 

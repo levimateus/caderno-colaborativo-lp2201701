@@ -28,4 +28,20 @@ class ComentarioController extends Controller
 
         return redirect('post/' . $request->input('publicacao'));
     }
+
+
+    public static function updateStatusComent($id, $status) {
+        $updatePost = DB::table('comentario')
+                        ->where('comentario_id', $id )
+                        ->update(array("status" => $status));
+
+        If ($updatePost) {
+
+            return true;
+        } else {
+            
+            return false;
+        }
+
+    }
 }

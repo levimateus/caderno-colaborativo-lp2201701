@@ -18,7 +18,8 @@ class PublicacaoController extends Controller
     public function index() {
 
         $professores = DB::table('usuario')->where('usuario_cargo', 3)->get();
-        $comments = Comentario::listarTodos();
+        //Pega todos os comentários que estão ativos (Diferentes do status 2)
+        $comments = DB::table('comentario')->where('status',"!=", 2)->get();
         $posts = Publicacao::listarPosts();
         $likes = Like::listarLikes();
         $idUser = Auth::id();
@@ -28,7 +29,7 @@ class PublicacaoController extends Controller
 
     public function show($id) {
         $professores = DB::table('usuario')->where('usuario_cargo', 3)->get();
-        $comments = ComentarioController::listarTodos();
+        $comments = DB::table('comentario')->where('status',"!=", 2)->get();
         $post = Publicacao::listarPostId($id);
         $likes = Like::listarLikes();
         $idUser = Auth::id();

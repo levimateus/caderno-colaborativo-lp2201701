@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\PublicacaoController;
+use App\Http\Controllers\ComentarioController;
 
 use Illuminate\Http\Request;
 use App\models\dao\Denuncia;
@@ -38,24 +39,29 @@ class DenunciaController extends Controller
 
     public function bloquear(Request $request) {
         $postId = $request->input('postId');
+        $comentId = $request->input('comentId');
         $reportId = $request->input('report');
 
         $disablePost = false;
+        $disableComent = false;
 
         $report = Denuncia::findOrFail($reportId);
 
         if ($postId) {
             $disablePost = PublicacaoController::updateStatusPost($postId, 2);
-        } else {
-            $message = "Opa! :( Não conseguimos identificar a publicação";
-
-            return redirect('reports')->with('message', $message);
+        }
+        if ($comentId) {
+            $disableComent= ComentarioController::updateStatusComent($comentId, 2);
         }
 
         $updateReport = $this->updateStatusReport($reportId, Denuncia::AVALIADO);
 
-        if ($disablePost && $updateReport) {
+        if ($updateReport) {
+            if($disablePost) {
                 $message = "Publicação bloqueada com sucesso! :D";
+            } elseif ($disableComent) {
+                $message = "Comentário bloqueado com sucesso! :D";
+            }
         } else {
             $message = "Opa! :( ocorreu uma falha inesperada";
         }
