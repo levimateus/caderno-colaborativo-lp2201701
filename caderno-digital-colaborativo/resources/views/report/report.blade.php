@@ -1,5 +1,12 @@
 <article class="report ifBlock">
-    <h4>Denuncia: {{ $report->denuncia_id }}</h3>
+    <h4>Denuncia: {{ $report->denuncia_id }}</h3> 
+    @if ($report->status == 1) 
+        <span class="pull-right">Status: Aguardando Avaliação</span>
+    @else 
+        <span class="pull-right">Status: Avaliado</span>
+    @endif
+
+
     <h4>Data: {{ $report->denuncia_dt }} </h4>
     <h5>Autor da denuncia: {{ $report->usuario_id_autor }} </h5>
     <div class="report-content">
@@ -17,10 +24,10 @@
 
         @if ($report->publicacao_id)
             <span>Bloquear publicação!</span>
-            <input type="hidden" name="id" value="{{$report->publicacao_id}}">
+            <input type="hidden" name="postId" value="{{$report->publicacao_id}}">
         @else
             <span>Bloquear comentário!</span>
-            <input type="hidden" name="id" value="{{$report->comentario_id}}">
+            <input type="hidden" name="postId" value="{{$report->comentario_id}}">
         @endif
         <input type="hidden" name="report" value="{{$report->denuncia_id}}">
     </form>
@@ -32,9 +39,9 @@
         </button>
 
         @if ($report->publicacao_id)
-            <input type="hidden" name="id" value="{{$report->publicacao_id}}">
+            <input type="hidden" name="postId" value="{{$report->publicacao_id}}">
         @else
-            <input type="hidden" name="id" value="{{$report->comentario_id}}">
+            <input type="hidden" name="postId" value="{{$report->comentario_id}}">
         @endif
         <input type="hidden" name="report" value="{{$report->denuncia_id}}">
 

@@ -109,8 +109,19 @@ class PublicacaoController extends Controller
         echo "<img src ='".asset("storage/app/public/publicacoes/".$midia->midia_href)."' />";
     }
 
-    public function excluir() {
-        //exclui publicação
+    public static function updateStatusPost($id, $status) {
+        $updatePost = DB::table('publicacao')
+                        ->where('publicacao_id', $id )
+                        ->update(array("publicacao_status" => $status));
+
+        If ($updatePost) {
+
+            return true;
+        } else {
+            
+            return false;
+        }
+
     }
 
     public function editar(array $dados){

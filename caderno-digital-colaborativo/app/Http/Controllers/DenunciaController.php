@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\PublicacaoController;
+
 use Illuminate\Http\Request;
 use App\models\dao\Denuncia;
 use App\Mail\Report;
@@ -35,7 +37,29 @@ class DenunciaController extends Controller
     }
 
     public function bloquear(Request $request) {
-        $message = "Opa! :( ainda não criei esse método, by: Luís Takahashi";
+        $postId = $request->input('postId');
+        $reportId = $request->input('report');
+
+        $disablePost = false;
+
+        $report = Denuncia::findOrFail($reportId);
+
+        if ($postId) {
+            $disablePost = PublicacaoController::updateStatusPost($postId, 2);
+        } else {
+            $message = "Opa! :( Não conseguimos identificar a publicação";
+
+            return redirect('reports')->with('message', $message);
+        }
+
+        $updateReport = $this->updateStatusReport($reportId, Denuncia::AVALIADO);
+
+        if ($disablePost && $updateReport) {
+                $message = "Publicação bloqueada com sucesso! :D";
+        } else {
+            $message = "Opa! :( ocorreu uma falha inesperada";
+        }
+
         return redirect('reports')->with('message', $message);
     }
 
@@ -43,15 +67,30 @@ class DenunciaController extends Controller
 
         $reportId = $request->input('report');
 
-        $updateReport = DB::table('denuncia')
-                            ->where('denuncia_id', $reportId )
-                            ->update(array("status" => 2));
+        $updateReport = $this->updateStatusReport($reportId, Denuncia::INATIVO);
+
         if ($updateReport) {
+
             $message = "\o/ Denuncia descartada com sucesso!";
-            return redirect('reports')->with('message', $message);
         } else {
+
             $message = "Opa! :( ocorreu uma falha inesperada";
-            return redirect('reports')->with('message', $message);
+        }
+
+        return redirect('reports')->with('message', $message);
+    }
+
+    public static function updateStatusReport ($id, $status) {
+        $updateReport = DB::table('denuncia')
+                        ->where('denuncia_id', $id )
+                        ->update(array("status" => 3));
+
+        If ($updateReport) {
+
+            return true;
+        } else {
+            
+            return false;
         }
     }
 
@@ -74,10 +113,10 @@ class DenunciaController extends Controller
 
         $prof = DB::table('usuario')->where('usuario_id', $report->usuario_id_avaliador)->get();
 
-        if ($prof[0]->usuario_email) {
-            $email = $prof[0]->usuario_email;
-            \Mail::to($email)->send(new Report);
-        }
+        // if ($prof[0]->usuario_email) {
+        //     $email = $prof[0]->usuario_email;
+        //     \Mail::to($email)->send(new Report);
+        // }
 
 
         return redirect('home')->with('message', $message);
