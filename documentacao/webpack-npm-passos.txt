@@ -1,0 +1,5 @@
+1. instalar o npm
+2. rodar "npm install"
+3. rodar npm run dev
+4. a saida vai para o app.css, na pasta public/css
+5. caso queira alterar o web pack altere o arqui mix.webpack.json
