@@ -8,7 +8,7 @@
 	 <form role="form"  method="POST" action="/like" accept-charset="UTF-8" enctype="multipart/form-data">
         {{ csrf_field() }}
         <input type="hidden" name="comentario" value="{{$comment->comentario_id}}">
-        <button  class="btn btn-default like btn-login form-control" type="submit" name="like" id="like" value="">
+        <button  class="btn btn-if like btn-login form-control" type="submit" name="like" id="like" value="">
             @php
                 $contagemLike = 0;
                 $liked = '';
@@ -34,7 +34,7 @@
                 data-toggle="modal" 
                 data-target=".newReport.coment{{$comment->comentario_id}}"
         >
-            <button  class="btn btn-default form-control text-center" type="button" >
+            <button  class="btn btn-if-down form-control text-center" type="button" >
                 <i class="fa fa-bullhorn" aria-hidden="true"></i>
             
             </button>

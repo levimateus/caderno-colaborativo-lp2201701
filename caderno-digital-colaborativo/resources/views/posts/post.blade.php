@@ -9,13 +9,13 @@
             <ul class="dropdown-menu" role="menu">
                 <li>
                     <a 
-                        type="button" 
-                        class="pull-right" 
                         id="abrir_report" 
                         data-toggle="modal" 
                         data-target=".newReport.post{{$post->publicacao_id}}"
                     >
-                        Denunciar <i class="fa fa-bullhorn" aria-hidden="true"></i>
+                        <button class="btn btn-if-down pull-right" type="button"  >
+                            Denunciar <i class="fa fa-bullhorn" aria-hidden="true"></i>    
+                        </button>
                     </a>
                 </li>
             </ul>
