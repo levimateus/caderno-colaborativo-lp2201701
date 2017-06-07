@@ -29,5 +29,18 @@
             @endif
             <i class="fa {{$liked}} fa-heart"></i>
         </button>
+        <a 
+            id="abrir_report" 
+                data-toggle="modal" 
+                data-target=".newReport.coment{{$comment->comentario_id}}"
+        >
+            <button  class="btn btn-default form-control text-center" type="button" >
+                <i class="fa fa-bullhorn" aria-hidden="true"></i>
+            
+            </button>
+        </a>
     </form>
+    <div class="report-modal-coment">
+        @include('report.reportModalComent')
+    </div>
 </div>

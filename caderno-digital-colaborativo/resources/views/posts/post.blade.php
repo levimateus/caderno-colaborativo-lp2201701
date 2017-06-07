@@ -84,6 +84,6 @@
     <span><a href="/post/{{ $post->publicacao_id }}">Saiba mais</a></span>
 </article>
 
-<div class="report">
+<div class="report-modal">
     @include('report.reportModal')
 </div>
