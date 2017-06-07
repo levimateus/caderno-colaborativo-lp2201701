@@ -83,7 +83,7 @@ class DenunciaController extends Controller
     public static function updateStatusReport ($id, $status) {
         $updateReport = DB::table('denuncia')
                         ->where('denuncia_id', $id )
-                        ->update(array("status" => 3));
+                        ->update(array("status" => $status));
 
         If ($updateReport) {
 
