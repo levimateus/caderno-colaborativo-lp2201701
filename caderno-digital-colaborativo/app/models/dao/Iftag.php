@@ -17,13 +17,8 @@ class Iftag extends Model
 
     protected $table	  = 'iftag';	//define a tabela a ser operada	
     public    $timestamps = false;		//desabilita a gravação de data na alteração na tabela
-    protected $primaryKey = 'iftag_id'; // or null
 
     //interesses
-    static function listarIftags() { 
-        return Iftag::all();
-    }
-
     public function iftagsUsuario(): BelongsToMany{
         return $this->belongsToMany(Usuario::class,'relacionamento_interesses' , 'iftag_id', 'usuario_id');
     }

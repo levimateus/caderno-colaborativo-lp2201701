@@ -7,7 +7,6 @@ use App\models\dao\Publicacao;
 use App\models\dao\Comentario;
 use App\models\dao\Midia;
 use App\models\dao\Like;
-use App\models\dao\Iftag;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
@@ -23,9 +22,8 @@ class PublicacaoController extends Controller
         $posts = Publicacao::listarPosts();
         $likes = Like::listarLikes();
         $idUser = Auth::id();
-        $iftags = Iftag::listarIftags();
 
-        return view('home', compact('posts','professores','comments', 'likes', 'idUser', 'iftags'));
+        return view('home', compact('posts','professores','comments', 'likes', 'idUser'));
     }
 
     public function show($id) {

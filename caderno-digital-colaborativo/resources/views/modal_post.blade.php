@@ -31,13 +31,6 @@
                         @endforeach
                     </select>
                     <br>
-                    <label for="iftags" class="col-sm-2">Tags</label>
-                    <select name="iftags" id="iftags" class="form-control selectpicker" required="required" multiple>
-                        @foreach($iftags as $iftag)
-                             <option value="{{$iftag->iftag_id}}">{{$iftag->iftag_nome}}</option>
-                        @endforeach
-                    </select>
-                    <br>
                     <label for="tags" class="col-sm-2">Tags</label>
                     <input type="text" name="tags" id="inputTags" class="form-control" value="" required="required" title="">
 
