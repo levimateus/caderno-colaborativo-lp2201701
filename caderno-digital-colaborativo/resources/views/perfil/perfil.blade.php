@@ -13,6 +13,7 @@
 			<div class="pull-left">
                             <img class="img-circle img-responsive img-center"  width="200" src="{{$fotoPerfil}}" alt="">
 				<h3>{{$usuario->usuario_nome}}</h3>
+                                <h3>{{$nivel_nome}}</h3>
                                 <button type="button" class="btn glyphicon glyphicon-picture" id="" data-toggle="modal" data-target=".perfil-foto-modal-lg"></button>
                                 <button type="button" class="btn glyphicon glyphicon-lock" id="" data-toggle="modal" data-target=".perfil-trocasenha-modal-lg"></button>
 			</div>

@@ -30,6 +30,8 @@ class PerfilController extends Controller {
         //procuramos o usuario na base de dados -> estamos usando sintaxes eloquent
         $usuario = Usuario::find($id_usuario);
 
+        $nivel_nome = \GamificacaoHelper::getNivelDescricao($usuario->usuario_experiencia);
+        
         //carregando a foto do perfil
         $midia = $usuario->fotoPerfil;
         if ($midia != null) {
@@ -40,9 +42,9 @@ class PerfilController extends Controller {
             $fotoPerfil = asset('img') . '/' . 'avatar-default.png';
         }
 
-        return view('perfil.perfil', compact('usuario', 'fotoPerfil'));
+        return view('perfil.perfil', compact('usuario', 'fotoPerfil', 'nivel_nome'));
     }
-
+    
     public function trocarFoto(Request $request) {
 
         $usuario_id = Auth::id();
