@@ -33,8 +33,13 @@ class Publicacao extends Model
 	}
 	
 	static function listarPostId($id) { 
-		return static::where('publicacao_id', '=', $id)->get()->first();;
+		return static::where('publicacao_id', '=', $id)->get()->first();
 	}
+
+	static function pesquisarPostsDescricao($texto){
+        return Publicacao::where('publicacao_descricao', 'LIKE', '%'.$texto.'%')
+            ->get();
+    }
 
 	public function autor(){
 		return $this->belongsTo('App\models\dao\Usuario', 'usuario_id_autor', 'usuario_id');

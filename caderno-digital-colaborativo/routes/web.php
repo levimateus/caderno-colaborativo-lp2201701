@@ -40,6 +40,8 @@ Route::post('/report/block/{id}', 'DenunciaController@bloquear');
 Route::post('/report/discard/{id}', 'DenunciaController@descartar');
 //Route::get('/post/{id}', 'PublicacaoController@ver'); //TESTE
 
+//rota para pesquisa
+Route::post('/pesquisa', 'PesquisaController@index');
 
 //rota para importação de CSV
 Route::get('/csv', 'UsuarioController@index');
