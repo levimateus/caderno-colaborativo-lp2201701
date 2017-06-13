@@ -28,13 +28,14 @@ class CustomUserProvider implements IlluminateUserProvider {
         $qry = User::where('usuario_id', '=', $identifier);
 
         if ($qry->count() > 0) {
-            $user = $qry->select('usuario_id', 'usuario_email', 'usuario_nome', 'usuario_sobrenome', 'usuario_email', 'usuario_senha')->first();
+            $user = $qry->select('usuario_id', 'usuario_email', 'usuario_nome', 'usuario_sobrenome', 'usuario_email', 'usuario_senha', 'usuario_cargo')->first();
 
             $attributes = array(
                 'id' => $user->usuario_id,
                 'usuario_email' => $user->usuario_email,
                 'usuario_senha' => $user->usuario_senha,
                 'usuario_nome' => $user->usuario_nome . ' ' . $user->usuario_sobrenome,
+                'usuario_cargo' => $user->usuario_cargo
             );
 
             return $user;
