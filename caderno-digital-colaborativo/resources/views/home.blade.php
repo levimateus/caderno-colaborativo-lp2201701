@@ -40,8 +40,9 @@
     @endforeach
     
     <!-- POST modal -->
-    <button type="button" class="btn btn-primary pull-right" id="abrir_novo_post" data-toggle="modal" data-target=".newPost">+</button>
-    
+    @if (Auth::user()->usuario_estado_acesso != 3)
+        <button type="button" class="btn btn-primary pull-right" id="abrir_novo_post" data-toggle="modal" data-target=".newPost">+</button>
+    @endif
     
 
     <div class="modal_post">
