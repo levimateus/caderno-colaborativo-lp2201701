@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\models\dao\Usuario;
+
+use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 class UsuarioController extends Controller
 {
@@ -146,6 +148,22 @@ class UsuarioController extends Controller
         return $validator;
     }
     
+
+    public static function updateStatusUser($id, $status) {
+        $updateUser = DB::table('usuario')
+                        ->where('usuario_id', $id )
+                        ->update(array("usuario_estado_acesso" => $status));
+
+        If ($updateUser) {
+
+            return true;
+        } else {
+            
+            return false;
+        }
+
+    }
+
 }
 
 

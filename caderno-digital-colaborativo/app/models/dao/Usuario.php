@@ -7,6 +7,10 @@ use App\models\dao\Iftag;
 
 class Usuario extends Model
 {       
+    const BLOQUEIOACESSO = 2;
+    const BLOQUEIOPUBLICACAO = 3;
+    const BLOQUEIOCOMENTARIO = 4;
+    
     const ALUNO = 0;
     const ADMINISTRADOR = 2;
     const PROFESSOR = 3;

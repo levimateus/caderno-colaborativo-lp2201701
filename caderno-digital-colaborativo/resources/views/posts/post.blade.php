@@ -9,13 +9,13 @@
             <ul class="dropdown-menu" role="menu">
                 <li>
                     <a 
-                        type="button" 
-                        class="pull-right" 
                         id="abrir_report" 
                         data-toggle="modal" 
                         data-target=".newReport.post{{$post->publicacao_id}}"
                     >
-                        Denunciar <i class="fa fa-bullhorn" aria-hidden="true"></i>
+                        <button class="btn btn-if-down pull-right" type="button"  >
+                            Denunciar <i class="fa fa-bullhorn" aria-hidden="true"></i>    
+                        </button>
                     </a>
                 </li>
             </ul>
@@ -44,9 +44,12 @@
                     @if (count($likes) > 0)
                         @foreach ($likes as $like)
                             @if ($like->publicacao_id == $post->publicacao_id and $like->comentario_id == null)
-                                {{$contagemLike + 1}}
+                                @php
+                                    $contagemLike++;
+                                @endphp
                             @endif
                         @endforeach
+                        {{$contagemLike }}
                         @foreach ($likes as $like)
                             @if($idUser == $like->usuario_id and $like->comentario_id == null and $like->publicacao_id == $post->publicacao_id)
                                 @php
@@ -84,6 +87,6 @@
     <span><a href="/post/{{ $post->publicacao_id }}">Saiba mais</a></span>
 </article>
 
-<div class="report">
+<div class="report-modal">
     @include('report.reportModal')
 </div>

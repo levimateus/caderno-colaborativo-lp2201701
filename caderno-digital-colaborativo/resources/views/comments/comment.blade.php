@@ -10,7 +10,7 @@
         
         <input type="hidden" name="publicacao" value="{{$comment->publicacao_id}}">
         <input type="hidden" name="comentario" value="{{$comment->comentario_id}}">
-        <button  class="btn btn-default like btn-login form-control" type="submit" name="like" id="like" value="">
+        <button  class="btn btn-if like btn-login form-control" type="submit" name="like" id="like" value="">
             @php
                 $contagemLike = 0;
                 $liked = '';
@@ -18,9 +18,12 @@
             @if (count($likes) > 0)
 	            @foreach ($likes as $like)
 	                @if ($like->comentario_id == $comment->comentario_id and $like->publicacao_id == null)
-	                    {{$contagemLike + 1}}
+                        @php
+                            $contagemLike++;
+                        @endphp
 	                @endif
 	            @endforeach
+                {{$contagemLike}}
 	            @foreach ($likes as $like)
 	            	@if($idUser == $like->usuario_id and $like->publicacao_id == null and $like->comentario_id == $comment->comentario_id)
                         @php
@@ -31,5 +34,18 @@
             @endif
             <i class="fa {{$liked}} fa-heart"></i>
         </button>
+        <a 
+            id="abrir_report" 
+                data-toggle="modal" 
+                data-target=".newReport.coment{{$comment->comentario_id}}"
+        >
+            <button  class="btn btn-if-down form-control text-center" type="button" >
+                <i class="fa fa-bullhorn" aria-hidden="true"></i>
+            
+            </button>
+        </a>
     </form>
+    <div class="report-modal-coment">
+        @include('report.reportModalComent')
+    </div>
 </div>

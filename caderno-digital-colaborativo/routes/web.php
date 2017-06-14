@@ -36,8 +36,9 @@ Route::post('/perfil/trocarFoto', 'PerfilController@trocarFoto');
 Route::post('/post', 'PublicacaoController@publicar');
 Route::post('/comment', 'ComentarioController@comentar');
 Route::post('/report', 'DenunciaController@novaDenuncia');
-Route::post('/report/block/{id}', 'DenunciaController@bloquear');
-Route::post('/report/discard/{id}', 'DenunciaController@descartar');
+Route::post('/report/block', 'DenunciaController@bloquear');
+Route::post('/report/discard', 'DenunciaController@descartar');
+Route::post('/report/user', 'DenunciaController@punirUsuario');
 //Route::get('/post/{id}', 'PublicacaoController@ver'); //TESTE
 
 //rota para pesquisa
