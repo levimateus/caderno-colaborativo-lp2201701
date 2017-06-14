@@ -75,15 +75,18 @@
             @endif
         @endforeach
     </div>
-    <form role="form"  method="POST" action="/comment" accept-charset="UTF-8" enctype="multipart/form-data">
-        {{ csrf_field() }}
-        <div class="clearfix">
-            <input class="col-sm-9 center-align" type="text" placeholder="Comente aqui.." name="comentario" id="comentario" class="form-control" value="" required="required" title="">
-            <input type="hidden" name="publicacao" value="{{$post->publicacao_id}}">
+    @if (Auth::user()->usuario_estado_acesso != 4)
+        <form role="form"  method="POST" action="/comment" accept-charset="UTF-8" enctype="multipart/form-data">
+            {{ csrf_field() }}
+            <div class="clearfix">
+                <input class="col-sm-9 center-align" type="text" placeholder="Comente aqui.." name="comentario" id="comentario" class="form-control" value="" required="required" title="">
+                <input type="hidden" name="publicacao" value="{{$post->publicacao_id}}">
 
-            <button type="submit" class="btn btn-primary btn-if col-sm-3">Enviar</button>
-        </div>
-    </form>
+                <button type="submit" class="btn btn-primary btn-if col-sm-3">Enviar</button>
+            </div>
+        </form>
+    @endif
+
     <span><a href="/post/{{ $post->publicacao_id }}">Saiba mais</a></span>
 </article>
 
