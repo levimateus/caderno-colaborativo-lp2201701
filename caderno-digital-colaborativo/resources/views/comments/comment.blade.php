@@ -16,9 +16,12 @@
             @if (count($likes) > 0)
 	            @foreach ($likes as $like)
 	                @if ($like->comentario_id == $comment->comentario_id and $like->publicacao_id == null)
-	                    {{$contagemLike + 1}}
+                        @php
+                            $contagemLike++;
+                        @endphp
 	                @endif
 	            @endforeach
+                {{$contagemLike}}
 	            @foreach ($likes as $like)
 	            	@if($idUser == $like->usuario_id and $like->publicacao_id == null and $like->comentario_id == $comment->comentario_id)
                         @php

@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\PublicacaoController;
 use App\Http\Controllers\ComentarioController;
+use App\Http\Controllers\UsuarioController;
 
 use Illuminate\Http\Request;
 use App\models\dao\Denuncia;
+use App\models\dao\Usuario;
 use App\Mail\Report;
 
 use Illuminate\Support\Facades\Auth;
@@ -37,6 +39,45 @@ class DenunciaController extends Controller
         }
     }
 
+    public function punirUsuario(Request $request) {
+        $reportId = $request->input('report_id');
+        $punicao = $request->input('punicao');
+
+        $updateUser = false;
+
+        $report = Denuncia::findOrFail($reportId);
+        $autor = $report->usuario_id_autor;
+
+        switch ($punicao) {
+            //Bloquear Acesso
+            case 1: 
+                $updateUser = UsuarioController::updateStatusUser($autor, Usuario::BLOQUEIOACESSO);
+            break;
+            //Bloquear Fazer publicação
+            case 2;
+                $updateUser = UsuarioController::updateStatusUser($autor, Usuario::BLOQUEIOPUBLICACAO);
+            break;
+            //Bloquear Fazer comentário
+            case 3:
+                $updateUser = UsuarioController::updateStatusUser($autor, Usuario::BLOQUEIOCOMENTARIO);
+            break;
+            default:
+                $message = "Opa! :( Ocorreu uma falha inesperado!";
+            return redirect('home')->with('message', $message);
+            break;
+        }
+
+        $updateReport = $this->updateStatusReport($reportId, Denuncia::AVALIADO);
+
+        if ($updateReport && $updateUser) {
+            $message = "Autor da denuncia ".$reportId." penitencializado com sucesso! :D";
+        } else {
+            $message = "Opa! :( ocorreu uma falha inesperada aqui";
+        }
+
+        return redirect('reports')->with('message', $message);
+    }
+
     public function bloquear(Request $request) {
         $postId = $request->input('postId');
         $comentId = $request->input('comentId');
@@ -58,7 +99,7 @@ class DenunciaController extends Controller
 
         if ($updateReport) {
             if($disablePost) {
-                $message = "Publicação bloqueada com sucesso! :D";
+                $message = "Usuário com sucesso! :D";
             } elseif ($disableComent) {
                 $message = "Comentário bloqueado com sucesso! :D";
             }

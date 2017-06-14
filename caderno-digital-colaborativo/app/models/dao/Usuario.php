@@ -7,6 +7,9 @@ use App\models\dao\Iftag;
 
 class Usuario extends Model
 {       
+    const BLOQUEIOACESSO = 2;
+    const BLOQUEIOPUBLICACAO = 3;
+    const BLOQUEIOCOMENTARIO = 4;
     
     protected $table      = 'usuario';
     public    $timestamps = false;
