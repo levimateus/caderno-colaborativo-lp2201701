@@ -7,6 +7,8 @@
 	</div>
 	 <form role="form"  method="POST" action="/like" accept-charset="UTF-8" enctype="multipart/form-data">
         {{ csrf_field() }}
+        
+        <input type="hidden" name="publicacao" value="{{$comment->publicacao_id}}">
         <input type="hidden" name="comentario" value="{{$comment->comentario_id}}">
         <button  class="btn btn-if like btn-login form-control" type="submit" name="like" id="like" value="">
             @php

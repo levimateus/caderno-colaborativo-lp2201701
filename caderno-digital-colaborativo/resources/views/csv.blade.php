@@ -6,13 +6,12 @@
 
 <form role="form"  method="POST" action="/importar" accept-charset="UTF-8" enctype="multipart/form-data">
     {{ csrf_field() }}
-    <legend>Form title</legend>
+    <legend>Importar usuários</legend>
     <div class="form-group">
         <input type="file" name="arquivo" id="arquivo" />
     </div>
     
-
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-primary">Enviar</button>
 </form>
 
 @endsection

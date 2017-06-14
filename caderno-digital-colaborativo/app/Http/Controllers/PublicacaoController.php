@@ -48,8 +48,13 @@ class PublicacaoController extends Controller
         $post->usuario_id_autor = Auth::id();
         $post->usuario_id_professor = $request->input('professor');
         $post->midia_id = $this->getObtainMedia($request);
-        $post->save();
-
+        
+        $resposta = $post->save();
+        
+        if($resposta){
+            \GamificacaoHelper::gamificacao(Auth::id(), 'publicar', $post->publicacao_id);
+        }
+        
         return $this->index();
     }
 

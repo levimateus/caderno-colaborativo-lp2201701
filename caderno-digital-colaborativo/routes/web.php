@@ -41,6 +41,8 @@ Route::post('/report/discard', 'DenunciaController@descartar');
 Route::post('/report/user', 'DenunciaController@punirUsuario');
 //Route::get('/post/{id}', 'PublicacaoController@ver'); //TESTE
 
+//rota para pesquisa
+Route::post('/pesquisa', 'PesquisaController@index');
 
 //rota para importação de CSV
 Route::get('/csv', 'UsuarioController@index');
