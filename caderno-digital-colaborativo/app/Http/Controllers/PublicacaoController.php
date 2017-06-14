@@ -7,6 +7,7 @@ use App\models\dao\Publicacao;
 use App\models\dao\Comentario;
 use App\models\dao\Midia;
 use App\models\dao\Like;
+use App\models\dao\Iftag;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
@@ -41,13 +42,37 @@ class PublicacaoController extends Controller
         //$post->publicacao_descricao = $request->descricao;
         $post->publicacao_descricao = $request->input('descricao');
         $post->publicacao_area = $request->input('area');
-        $post->publicacao_tags = $request->input('tags');
         $post->publicacao_dt = Carbon::now();
         $post->publicacao_status = 1;
         $post->usuario_id_autor = Auth::id();
         $post->usuario_id_professor = $request->input('professor');
         $post->midia_id = $this->getObtainMedia($request);
-        $post->save();
+        //$post->save();
+
+        $iftag = new Iftag;
+        $tagsExistentes = $iftag->listarIfTags();
+        $tagsNomesExistentes = array();
+        foreach ($tagsExistentes as $key => $tag) {
+            $tagsNomesExistentes[] = $tag['iftag_nome']);
+        }
+
+        $tags = $request->input('tags');
+        $tags = str_replace(' ', '', $tags);
+        $tags = str_replace('.', '', $tags);
+        $tags = str_replace(',', '', $tags);
+        $tags = explode('#', $tags); 
+        foreach ($tags as $key => $tag) {
+            $iftag->publicacao_id;
+            $iftag->iftag_nome = $tag;
+            if (!in_array($tag, $tagsNomesExistentes)) {
+                $iftag->save();
+                $relacionamento = new RelacionamentoPublicacaoTag;
+                // $relacionamento->iftag_id = 
+                // $relacionamento->publicacao_id = 
+            }
+        }
+
+        $post->publicacao_tags = $request->input('tags');
 
         return $this->index();
     }
