@@ -21,12 +21,15 @@ class LikeController extends Controller
         }
 
         if ($existing_like) {
+            
             if ($request->input('comentario')) {
-                Like::where('comentario_id', $request->input('comentario'))->where('usuario_id', Auth::id())->delete();
+                $like = Like::where('comentario_id', $request->input('comentario'))->where('usuario_id', Auth::id())->first();
+                $like->delete();
             } elseif ($request->input('publicacao')) {
-                Like::where('publicacao_id', $request->input('publicacao'))->where('usuario_id', Auth::id())->delete();
+                $like = Like::where('publicacao_id', $request->input('publicacao'))->where('usuario_id', Auth::id())->first();
+                $like->delete();
             }
-
+            \GamificacaoHelper::retiraPonto(Auth::id(), 'like', $like->like_id);
             return redirect('home/');
         } else {
             $coment = new Like;
@@ -35,6 +38,8 @@ class LikeController extends Controller
             $coment->comentario_id = $request->input('comentario');
             $coment->save();
 
+            \GamificacaoHelper::gamificacao(Auth::id(), 'like', $coment->like_id);
+            
             return redirect('home/');
         }
     }

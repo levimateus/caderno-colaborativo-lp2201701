@@ -159,6 +159,9 @@ class DenunciaController extends Controller
             $message = "Ocorreu um erro inesperado! :(";
         }
 
+        //adicionando pontos para usuario do reporte
+        \GamificacaoHelper::gamificacao(Auth::id(), 'denuncia', $report->denuncia_id);
+            
         $prof = DB::table('usuario')->where('usuario_id', $report->usuario_id_avaliador)->get();
 
         // if ($prof[0]->usuario_email) {
