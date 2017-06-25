@@ -21,9 +21,10 @@ class DenunciaController extends Controller
 
     public function index()
     {
-        $professor = DB::table('usuario')->where('usuario_cargo', Auth::id())->get();
-
-        if (!empty($professor[0])) {
+        $usuario_logado = DB::table('usuario')->where('usuario_id',Auth::id())->first();
+        
+        if ($usuario_logado->usuario_cargo == 3) { //é professor?
+            
             $reports = DB::table('denuncia')->where('usuario_id_avaliador', Auth::id())->get();
             if (!empty($reports[0])) {
 

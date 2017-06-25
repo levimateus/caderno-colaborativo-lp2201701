@@ -18,10 +18,14 @@ use Carbon\Carbon;
 class GamificacaoHelper {
     
     public static function getNivelDescricao($pontos){
+        if($pontos==NULL){
+            $pontos = 0;
+        }
         $gnivel_pontos = \App\models\dao\GamificacaoNivel::
-                where('gnivel_pontos', '<', $pontos)
+                where('gnivel_pontos', '<=', $pontos)
                 ->orderBy('gnivel_pontos', 'desc')
                 ->first();
+        
         return $gnivel_pontos->gnivel_nome;
         
     }
