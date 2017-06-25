@@ -52,7 +52,7 @@ class PublicacaoController extends Controller
         $resposta = $post->save();
         
         if($resposta){
-            \GamificacaoHelper::gamificacao(Auth::id(), 'publicar', $post->publicacao_id);
+            \GamificacaoHelper::gamificacao(Auth::id(), 'publicacao', $post->publicacao_id);
         }
         
         return $this->index();

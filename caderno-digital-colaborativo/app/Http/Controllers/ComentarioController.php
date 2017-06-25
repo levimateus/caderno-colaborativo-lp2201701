@@ -26,6 +26,9 @@ class ComentarioController extends Controller
         $coment->usuario_id = Auth::id();
         $coment->save();
 
+        //adicionando pontos para usuario do comentario
+        \GamificacaoHelper::gamificacao(Auth::id(), 'comentario', $coment->comentario_id);
+        
         return redirect('post/' . $request->input('publicacao'));
     }
 
