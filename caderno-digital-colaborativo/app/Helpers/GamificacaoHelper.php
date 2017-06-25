@@ -37,14 +37,50 @@ class GamificacaoHelper {
         GamificacaoHelper::registrarGamificacao($usuarioId, $acao, $publicaoId, $pontos);
     }
     
+    public static function retiraPonto($usuarioId , $acao, $publicaoId){
+        
+        $pontos = GamificacaoHelper::getPontosGanhos($usuarioId , $acao, $publicaoId);
+        GamificacaoHelper::removerPontosdoPerfil($usuarioId, $pontos);
+        GamificacaoHelper::removerGamificacao($usuarioId , $acao, $publicaoId);        
+    }
+        
+    private static function getPontosGanhos($usuarioId , $acao, $publicacaoId){
+        $gacao = App\models\dao\GamificacaoAcao::where('gacao_descricao', $acao)->first();
+        
+        $usuario_gamificacao = App\models\dao\UsuarioGamificacao::
+                where('usuario_id', $usuarioId)
+                ->where('gacao_id', $gacao->gacao_id)
+                ->where('usuario_acao_id', $publicacaoId)
+                ->first();
+        return $usuario_gamificacao->pontos;
+    }
     
-    public static function verificaPontos($acao){
+    
+    private static function removerPontosdoPerfil($usuarioId, $pontos){        
+        $usuario = \App\models\dao\Usuario::where('usuario_id', $usuarioId)->first();
+        $pontosAtuais = $usuario->usuario_experiencia;
+        
+        $usuario->usuario_experiencia = $pontosAtuais - $pontos;
+        $usuario->save();
+    }
+    
+    private static function removerGamificacao($usuarioId , $acao, $publicacaoId){
+        $gacao = App\models\dao\GamificacaoAcao::where('gacao_descricao', $acao)->first();
+        
+        $usuario_gamificacao = App\models\dao\UsuarioGamificacao::
+                where('usuario_id', $usuarioId)
+                ->where('gacao_id', $gacao->gacao_id)
+                ->where('usuario_acao_id', $publicacaoId)
+                ->delete();
+    }
+    
+    private static function verificaPontos($acao){
         $gacao = App\models\dao\GamificacaoAcao::where('gacao_descricao', $acao)->first();
         return $gacao->gacao_pontos;
     }
     
     
-    public static function adicionaPontos($usuarioId, $pontos){        
+    private static function adicionaPontos($usuarioId, $pontos){        
         $usuario = \App\models\dao\Usuario::where('usuario_id', $usuarioId)->first();
         $pontosAtuais = $usuario->usuario_experiencia;
         
@@ -52,7 +88,7 @@ class GamificacaoHelper {
         $usuario->save();
     }
     
-    public static function registrarGamificacao($usuarioId, $acao, $publicaoId, $pontos){
+    private static function registrarGamificacao($usuarioId, $acao, $publicaoId, $pontos){
         $gacao = App\models\dao\GamificacaoAcao::where('gacao_descricao', $acao)->first();
         
         $usuarioGamificacao = new \App\models\dao\UsuarioGamificacao();
