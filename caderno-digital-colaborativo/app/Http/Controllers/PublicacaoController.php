@@ -49,7 +49,7 @@ class PublicacaoController extends Controller
         $post->usuario_id_autor = Auth::id();
         $post->usuario_id_professor = $request->input('professor');
         $post->midia_id = $this->getObtainMedia($request);
-<<<<<<< caderno-digital-colaborativo/app/Http/Controllers/PublicacaoController.php
+
         $resposta = $post->save();
         $ultimoPost = Publicacao::all()->last();
         $idPost = $ultimoPost->publicacao_id;
@@ -85,13 +85,13 @@ class PublicacaoController extends Controller
             $relacionamento->save();
         }
 
-=======
+
         
         if($resposta){
             \GamificacaoHelper::gamificacao(Auth::id(), 'publicacao', $post->publicacao_id);
         }
         
->>>>>>> caderno-digital-colaborativo/app/Http/Controllers/PublicacaoController.php
+
         return $this->index();
     }
 
