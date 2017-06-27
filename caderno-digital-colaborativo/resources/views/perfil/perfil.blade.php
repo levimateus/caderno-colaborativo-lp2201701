@@ -58,6 +58,35 @@
 				</a>
 			</div>
 			{{-- segundo painel --}}
+			@if($id_usuario != Auth::id())
+				@if($estou_seguindo === true)
+					<form role="form"  method="POST" action="/deixar-de-seguir" accept-charset="UTF-8" enctype="multipart/form-data">
+	                	{{ csrf_field() }}
+                		<input type="hidden" name="id_usuario" value="{{$id_usuario}}">
+                		<input type="hidden" name="pagina" value="1">
+						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+							<div class="btn-group btn-group-justified" role="group">
+								<div class="btn-group" role="group">
+									<button type="submit" class="btn btn-success">Seguindo</button>
+								</div>
+							</div>
+						</div>
+					</form>
+				@else
+					<form role="form"  method="POST" action="/seguir" accept-charset="UTF-8" enctype="multipart/form-data">
+		                {{ csrf_field() }}
+	                	<input type="hidden" name="id_usuario" value="{{$id_usuario}}">
+	                	<input type="hidden" name="pagina" value="1">
+						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+							<div class="btn-group btn-group-justified" role="group">
+								<div class="btn-group" role="group">
+									<button type="submit" class="btn btn-default">Seguir</button>
+								</div>
+							</div>
+						</div>
+					</form>
+				@endif
+			@endif
 		</div>
 	</div>
 </div>

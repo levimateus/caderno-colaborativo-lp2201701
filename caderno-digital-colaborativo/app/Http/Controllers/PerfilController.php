@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\models\dao\Publicacao;
 use App\models\dao\Like;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 use App\models\dao\Midia;
 use App\models\dao\Usuario;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\RedirectResponse;
 
 class PerfilController extends Controller {
 
@@ -33,7 +35,6 @@ class PerfilController extends Controller {
         $usuario = Usuario::find($id_usuario);
 
         //quantidade de usuáros que está seguindo
-        // $seguindo   = DB::table('relacionamento_seguidores')->where('usuario_id_seguidor', '=', $id_usuario)->count('*');
         $seguindo   = DB::table('relacionamento_seguidores')->where('usuario_id_seguidor', '=', $id_usuario)->count('*');
         //quantidade de seguidores
         $seguidores = DB::table('relacionamento_seguidores')->where('usuario_id_seguindo', '=', $id_usuario)->count('*');
@@ -56,7 +57,13 @@ class PerfilController extends Controller {
         $likes       = Like::listarLikes();
         $idUser      = Auth::id();
 
-        return view('perfil.perfil', compact('usuario', 'fotoPerfil', 'seguindo', 'seguidores','id_usuario','nivel_nome', 'comments', 'posts', 'likes', 'idUser', 'professores'));
+
+        //verificar se o usuário logado segue esse usuário, caso não esteja acessando o próprio perfil
+        if ($id_usuario != Auth::id()) {
+            $estou_seguindo = $this->verificaSeguidor($id_usuario);
+        }
+
+        return view('perfil.perfil', compact('usuario', 'fotoPerfil', 'seguindo', 'seguidores','id_usuario','nivel_nome', 'comments', 'posts', 'likes', 'idUser', 'professores','estou_seguindo'));
     }
 
     public function trocarFoto(Request $request) {
@@ -113,8 +120,12 @@ class PerfilController extends Controller {
         ->join('usuario', 'relacionamento_seguidores.usuario_id_seguindo', '=', 'usuario.usuario_id')
         ->select('usuario.usuario_nome', 'usuario.usuario_sobrenome', 'usuario.usuario_id')
         ->where('relacionamento_seguidores.usuario_id_seguidor', '=', $id_usuario)->get();
-
-        return view('perfil.seguindo', compact('id_usuario','seguindo'));
+        //verificar quais destes usuários estou seguindo
+        $estou_seguindo = array(); 
+        foreach ($seguindo as $seguido) {
+            $estou_seguindo[$seguido->usuario_id] = $this->verificaSeguidor($seguido->usuario_id);
+        }
+        return view('perfil.seguindo', compact('id_usuario','seguindo','estou_seguindo'));
     }
 
     public function getSeguidores($id_usuario = 0){
@@ -123,8 +134,64 @@ class PerfilController extends Controller {
         ->join('usuario', 'relacionamento_seguidores.usuario_id_seguidor', '=', 'usuario.usuario_id')
         ->select('usuario.usuario_nome', 'usuario.usuario_sobrenome', 'usuario.usuario_id')
         ->where('relacionamento_seguidores.usuario_id_seguindo', '=', $id_usuario)->get();
+        //verificar quais destes usuários estou seguindo
+        $estou_seguindo = array(); 
+        foreach ($seguidores as $seguidor) {
+            $estou_seguindo[$seguidor->usuario_id] = $this->verificaSeguidor($seguidor->usuario_id);
+        }
+        return view('perfil.seguidores', compact('id_usuario', 'seguidores', 'estou_seguindo'));
+    }
 
-        return view('perfil.seguidores', compact('id_usuario', 'seguidores'));
+    public function verificaSeguidor($id_usuario){
+        $verifica = DB::table('relacionamento_seguidores')
+        ->where('usuario_id_seguidor', '=', Auth::id())
+        ->where('usuario_id_seguindo', '=', $id_usuario)
+        ->first();
+        if ($verifica) {
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public function seguir(Request $request){
+        $id_usuario = $request->input('id_usuario');
+        DB::table('relacionamento_seguidores')->insert(
+            ['usuario_id_seguidor' => Auth::id(), 'usuario_id_seguindo' => $id_usuario]
+        );
+        //veio pela tela de perfil (1)
+        $pagina = $request->input('pagina');
+        if ($pagina == 1) {
+            return redirect('perfil/'.$id_usuario);
+        }elseif ($pagina == 2) {
+            return redirect('seguidores/'.Auth::id());
+        }elseif($pagina == 3){
+            return redirect('seguidores/'.$id_usuario);
+        }elseif ($pagina == 4) {
+            return redirect('seguindo/'.Auth::id());
+        }elseif($pagina == 5){
+            return redirect('seguindo/'.$id_usuario);
+        }
+    }
+
+    public function deixarDeSeguir(Request $request){
+        $id_usuario = $request->input('id_usuario');
+        $relacionamento_seguidores = DB::table('relacionamento_seguidores')
+        ->where('usuario_id_seguidor', '=', Auth::id())
+        ->where('usuario_id_seguindo', '=', $id_usuario)->delete();
+        //veio pela tela de perfil (1)
+        $pagina = $request->input('pagina');
+        if ($pagina == 1) {
+            return redirect('perfil/'.$id_usuario);
+        }elseif ($pagina == 2) {
+            return redirect('seguidores/'.Auth::id());
+        }elseif($pagina == 3){
+            return redirect('seguidores/'.$id_usuario);
+        }elseif ($pagina == 4) {
+            return redirect('seguindo/'.Auth::id());
+        }elseif($pagina == 5){
+            return redirect('seguindo/'.$id_usuario);
+        }
     }
 }
 

@@ -33,6 +33,8 @@ Route::get('/perfil/', 'PerfilController@index');
 Route::post('/perfil/trocarFoto', 'PerfilController@trocarFoto');
 Route::get('/seguidores/{id_usuario}', 'PerfilController@getSeguidores');
 Route::get('/seguindo/{id_usuario}', 'PerfilController@getSeguindo');
+Route::post('/seguir', 'PerfilController@seguir');
+Route::post('/deixar-de-seguir', 'PerfilController@deixarDeSeguir');
 
 //Route::get('/post', 'PublicacaoController@index');//TESTE
 Route::post('/post', 'PublicacaoController@publicar');
