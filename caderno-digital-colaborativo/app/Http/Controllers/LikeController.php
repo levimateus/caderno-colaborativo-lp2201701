@@ -13,7 +13,6 @@ use Illuminate\Http\RedirectResponse;
 class LikeController extends Controller
 {
     public function inserir(Request $request) {
-
         if ($request->input('comentario')) {
             $existing_like = Like::where('comentario_id', $request->input('comentario'))->where('usuario_id', Auth::id())->first();
         } elseif ($request->input('publicacao')) {

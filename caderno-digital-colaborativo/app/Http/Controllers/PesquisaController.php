@@ -22,37 +22,32 @@ class PesquisaController extends Controller
 
     public function __construct()
     {
-    	$this->middleware('auth');
+        $this->middleware('auth');
     }
 
     public function index(Request $request)
     {
 
-    	switch ($request->tipo_pesquisa) {
-    		//case 'iftags':
-    		//	$usuarios = Usuario::pesquisarUsuariosNome($request->pesquisa);
-    		//	return view('pesquisa', compact('usuarios'));
-    		//	break;
+        switch ($request->tipo_pesquisa) {
+            //case 'iftags':
+            //  $usuarios = Usuario::pesquisarUsuariosNome($request->pesquisa);
+            //  return view('pesquisa', compact('usuarios'));
+            //  break;
 
-    		case 'publicacoes':
-		        $posts = Publicacao::pesquisarPostsDescricao($request->pesquisa);
-    			$professores = DB::table('usuario')->where('usuario_cargo', 3)->get();
-		        $comments = Comentario::listarTodos();
-		        $likes = Like::listarLikes();
-		        $idUser = Auth::id();
-    			return view('home', compact('posts','professores','comments', 'likes', 'idUser'));
-        	break;
-        		
-			case 'usuarios':
-    			$usuarios = Usuario::pesquisarUsuariosNome($request->pesquisa);
-    			return view('pesquisa', compact('usuarios'));
-			break;
-		}
-
-    	//	default:
-    	//		$usuarios = Usuario::pesquisarUsuariosNome($request->pesquisa);
-    	//		return view('pesquisa', compact('usuarios'));
-    	//		break;
-	}
+            case 'publicacoes':
+                $posts = Publicacao::pesquisarPostsDescricao($request->pesquisa);
+                $professores = DB::table('usuario')->where('usuario_cargo', 3)->get();
+                $comments = Comentario::listarTodos();
+                $likes = Like::listarLikes();
+                $idUser = Auth::id();
+                return view('home', compact('posts','professores','comments', 'likes', 'idUser'));
+            break;
+                
+            case 'usuarios':
+                $usuarios = Usuario::pesquisarUsuariosNome($request->pesquisa);
+                return view('pesquisa', compact('usuarios'));
+            break;
+        }
+    }
 
 }

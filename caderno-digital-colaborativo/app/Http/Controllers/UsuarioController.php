@@ -38,14 +38,10 @@ class UsuarioController extends Controller
                     'estadoAcesso' => 0
                 );
 
-            echo "<h3>Usuario</h3>";
-            echo "<pre>";
-            print_r($linha);
-            echo "</pre>";
-            echo "<br>";
 
             $usuario = new Usuario;
             $usuario->inserir($linha);
+            return redirect('home');
         }
     }
     

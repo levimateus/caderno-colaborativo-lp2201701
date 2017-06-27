@@ -31,6 +31,11 @@ class Publicacao extends Model
 	static function listarPosts() { 
 		return Publicacao::all();
 	}
+
+
+	static function listarPostsPerfil($id_usuario) { 
+		return Publicacao::where('usuario_id_autor','=',$id_usuario)->get();
+	}
 	
 	static function listarPostId($id) { 
 		return static::where('publicacao_id', '=', $id)->get()->first();
@@ -98,5 +103,6 @@ class Publicacao extends Model
 	public function likes(){
 		return $this->belongsToMany('App\User', 'likes');
 	}
+	
 	
 }
