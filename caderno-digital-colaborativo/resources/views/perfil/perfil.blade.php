@@ -63,11 +63,11 @@
 </div>
 
 <div class="meus_posts">
-	 @foreach($posts as $post)
-   		@if($post->publicacao_status == 1)
-       		@include('perfil.meus_posts')
-        @endif
-    @endforeach
+	@foreach($posts as $post)
+		@if($post->publicacao_status == 1)
+	   		@include('perfil.meus_posts')
+	    @endif
+	@endforeach
 </div>
 
 @include('perfil/modal_foto')

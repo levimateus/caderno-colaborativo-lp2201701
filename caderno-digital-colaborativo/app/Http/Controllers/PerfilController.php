@@ -33,6 +33,7 @@ class PerfilController extends Controller {
         $usuario = Usuario::find($id_usuario);
 
         //quantidade de usuáros que está seguindo
+        // $seguindo   = DB::table('relacionamento_seguidores')->where('usuario_id_seguidor', '=', $id_usuario)->count('*');
         $seguindo   = DB::table('relacionamento_seguidores')->where('usuario_id_seguidor', '=', $id_usuario)->count('*');
         //quantidade de seguidores
         $seguidores = DB::table('relacionamento_seguidores')->where('usuario_id_seguindo', '=', $id_usuario)->count('*');
@@ -107,32 +108,23 @@ class PerfilController extends Controller {
     }
 
     public function getSeguindo($id_usuario = 0){
-        //corrigir query
-        //seguindo
-        $seguindo   = DB::table('relacionamento_seguidores')
-        ->join('usuario', 'relacionamento_seguidores.usuario_id_seguidor', '=', 'usuario.usuario_id')
-        ->select('usuario.usuario_nome')
-        ->where('usuario_id_seguidor', '=', $id_usuario)->get();
-        var_dump($seguindo);
-        exit();
-        // $seguidor1['usuario_nome'] = 'Guilherme';
-        // $seguidor2['usuario_nome'] = 'Mateus';
-        // $seguidor3['usuario_nome'] = 'Luis';
-        // $seguidor4['usuario_nome'] = 'Gustavo';
-        // $seguidor5['usuario_nome'] = 'Lucas';
-        // $seguidor5['usuario_nome'] = 'Ana';
-        // $seguindo = array();
-        // array_push($seguindo, $seguidor1);
-        // array_push($seguindo, $seguidor2);
-        // array_push($seguindo, $seguidor3);
-        // array_push($seguindo, $seguidor4);
-        // array_push($seguindo, $seguidor5);
+        //usuários que ele está seguindo
+        $seguindo = DB::table('relacionamento_seguidores')
+        ->join('usuario', 'relacionamento_seguidores.usuario_id_seguindo', '=', 'usuario.usuario_id')
+        ->select('usuario.usuario_nome', 'usuario.usuario_sobrenome', 'usuario.usuario_id')
+        ->where('relacionamento_seguidores.usuario_id_seguidor', '=', $id_usuario)->get();
 
         return view('perfil.seguindo', compact('id_usuario','seguindo'));
     }
 
     public function getSeguidores($id_usuario = 0){
-        return view('perfil.seguidores', compact('id_usuario'));
+        //usuários que estão o seguindo
+        $seguidores = DB::table('relacionamento_seguidores')
+        ->join('usuario', 'relacionamento_seguidores.usuario_id_seguidor', '=', 'usuario.usuario_id')
+        ->select('usuario.usuario_nome', 'usuario.usuario_sobrenome', 'usuario.usuario_id')
+        ->where('relacionamento_seguidores.usuario_id_seguindo', '=', $id_usuario)->get();
+
+        return view('perfil.seguidores', compact('id_usuario', 'seguidores'));
     }
 }
 
