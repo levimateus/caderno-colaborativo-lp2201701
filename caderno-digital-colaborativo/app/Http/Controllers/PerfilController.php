@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\models\dao\Publicacao;
+use App\models\dao\Like;
 use Illuminate\Support\Facades\Storage;
 use App\models\dao\Midia;
 use App\models\dao\Usuario;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class PerfilController extends Controller {
 
@@ -26,12 +29,16 @@ class PerfilController extends Controller {
         if($id_usuario == 0){
             $id_usuario = Auth::id();
         }
-
         //procuramos o usuario na base de dados -> estamos usando sintaxes eloquent
         $usuario = Usuario::find($id_usuario);
 
-        //carregando a foto do perfil        
+        //quantidade de usuáros que está seguindo
+        $seguindo   = DB::table('relacionamento_seguidores')->where('usuario_id_seguidor', '=', $id_usuario)->count('*');
+        //quantidade de seguidores
+        $seguidores = DB::table('relacionamento_seguidores')->where('usuario_id_seguindo', '=', $id_usuario)->count('*');
+
         $nivel_nome = \GamificacaoHelper::getNivelDescricao($usuario->usuario_experiencia);
+        //carregando a foto do perfil
         $midia = $usuario->fotoPerfil;
         if ($midia != null) {
             //se existe colocamos a variavel fotoPerfil com o valor midia_href da tabela midia.
@@ -41,7 +48,14 @@ class PerfilController extends Controller {
             $fotoPerfil = asset('img') . '/' . 'avatar-default.png';
         }
 
-        return view('perfil.perfil', compact('usuario', 'fotoPerfil', 'nivel_nome'));
+        //recuperar os posts do usuário dono deste perfil
+        $professores = DB::table('usuario')->where('usuario_cargo', 3)->get();
+        $comments    = DB::table('comentario')->where('status',"!=", 2)->get();
+        $posts       = Publicacao::listarPostsPerfil($id_usuario);
+        $likes       = Like::listarLikes();
+        $idUser      = Auth::id();
+
+        return view('perfil.perfil', compact('usuario', 'fotoPerfil', 'seguindo', 'seguidores','id_usuario','nivel_nome', 'comments', 'posts', 'likes', 'idUser', 'professores'));
     }
 
     public function trocarFoto(Request $request) {
@@ -92,4 +106,33 @@ class PerfilController extends Controller {
         }
     }
 
+    public function getSeguindo($id_usuario = 0){
+        //corrigir query
+        //seguindo
+        $seguindo   = DB::table('relacionamento_seguidores')
+        ->join('usuario', 'relacionamento_seguidores.usuario_id_seguidor', '=', 'usuario.usuario_id')
+        ->select('usuario.usuario_nome')
+        ->where('usuario_id_seguidor', '=', $id_usuario)->get();
+        var_dump($seguindo);
+        exit();
+        // $seguidor1['usuario_nome'] = 'Guilherme';
+        // $seguidor2['usuario_nome'] = 'Mateus';
+        // $seguidor3['usuario_nome'] = 'Luis';
+        // $seguidor4['usuario_nome'] = 'Gustavo';
+        // $seguidor5['usuario_nome'] = 'Lucas';
+        // $seguidor5['usuario_nome'] = 'Ana';
+        // $seguindo = array();
+        // array_push($seguindo, $seguidor1);
+        // array_push($seguindo, $seguidor2);
+        // array_push($seguindo, $seguidor3);
+        // array_push($seguindo, $seguidor4);
+        // array_push($seguindo, $seguidor5);
+
+        return view('perfil.seguindo', compact('id_usuario','seguindo'));
+    }
+
+    public function getSeguidores($id_usuario = 0){
+        return view('perfil.seguidores', compact('id_usuario'));
+    }
 }
+
