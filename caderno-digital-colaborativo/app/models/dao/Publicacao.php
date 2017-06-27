@@ -36,6 +36,10 @@ class Publicacao extends Model
 		return static::where('publicacao_id', '=', $id)->get()->first();;
 	}
 
+	static function getUltimo() { 
+		return static::order_by('publicacao_dt', 'desc')->first();
+	}
+
 	public function autor(){
 		return $this->belongsTo('App\models\dao\Usuario', 'usuario_id_autor', 'usuario_id');
 	}
