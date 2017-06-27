@@ -28,13 +28,14 @@ class CustomUserProvider implements IlluminateUserProvider {
         $qry = User::where('usuario_id', '=', $identifier);
 
         if ($qry->count() > 0) {
-            $user = $qry->select('usuario_id', 'usuario_email', 'usuario_nome', 'usuario_sobrenome', 'usuario_email', 'usuario_senha')->first();
+            $user = $qry->select('usuario_id', 'usuario_email', 'usuario_nome', 'usuario_sobrenome', 'usuario_email', 'usuario_senha', 'usuario_cargo', 'usuario_estado_acesso')->first();
 
             $attributes = array(
                 'id' => $user->usuario_id,
                 'usuario_email' => $user->usuario_email,
                 'usuario_senha' => $user->usuario_senha,
                 'usuario_nome' => $user->usuario_nome . ' ' . $user->usuario_sobrenome,
+                'usuario_cargo' => $user->usuario_cargo
             );
 
             return $user;
@@ -113,7 +114,13 @@ class CustomUserProvider implements IlluminateUserProvider {
         if ($user->usuario_email == $credentials['email'] && $user->getAuthPassword() == md5($credentials['password'] . \Config::get('constants.SALT'))) {
 
 //            $user->last_login_time = Carbon::now();
-//            $user->save();            
+//            $user->save();  
+            $estadoDeAcesso = User::findOrFail($user->usuario_id)->usuario_estado_acesso;
+
+            if($estadoDeAcesso == 2) {
+                return false;
+            }
+            
             return true;
         }
         return false;

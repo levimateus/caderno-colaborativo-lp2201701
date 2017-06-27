@@ -7,11 +7,24 @@ use App\models\dao\Iftag;
 
 class Usuario extends Model
 {       
+    const BLOQUEIOACESSO = 2;
+    const BLOQUEIOPUBLICACAO = 3;
+    const BLOQUEIOCOMENTARIO = 4;
     
+    const ALUNO = 0;
+    const ADMINISTRADOR = 2;
+    const PROFESSOR = 3;
+
     protected $table      = 'usuario';
     public    $timestamps = false;
     protected $primaryKey = 'usuario_id';
     
+
+    static function pesquisarUsuariosNome($nome){
+        return Usuario::where('usuario_nome', 'LIKE', '%'.$nome.'%')
+            ->orWhere('usuario_sobrenome', 'LIKE', '%'.$nome.'%')
+            ->get();
+    }
 
     /*
     **  MÉTODOS DE DEFINIÇÃO DE RELACIONAMENTO
@@ -111,6 +124,10 @@ class Usuario extends Model
 
     public function avaliacoesDenuncias(){
     	return $this->hasMany('App\models\dao\Denuncias', 'usuario_id_avaliador');
+    }
+
+    public function pesquisa(){
+        $usuarios = DB::table('usuario')->select('name', 'email as user_email')->get();
     }
 
     /*  inserir novo registro

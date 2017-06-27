@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group name="cadernocolaborativo">
+            <file>file:/C:/Users/Jane%20Asher/Documents/git/caderno-digital-colaborativo/app/Helpers/GamificacaoHelper.php</file>
+            <file>file:/C:/Users/Jane%20Asher/Documents/git/caderno-digital-colaborativo/app/models/dao/GamificacaoAcao.php</file>
+            <file>file:/C:/Users/Jane%20Asher/Documents/git/caderno-digital-colaborativo/app/Helpers/MessageHelper.php</file>
+            <file>file:/C:/Users/Jane%20Asher/Documents/git/caderno-digital-colaborativo/app/models/dao/UsuarioGamificacao.php</file>
+            <file>file:/C:/Users/Jane%20Asher/Documents/git/caderno-digital-colaborativo/resources/views/posts/post.blade.php</file>
+            <file>file:/C:/Users/Jane%20Asher/Documents/git/caderno-digital-colaborativo/resources/views/comments/comment.blade.php</file>
+            <file>file:/C:/Users/Jane%20Asher/Documents/git/caderno-digital-colaborativo/app/Http/Controllers/PublicacaoController.php</file>
+            <file>file:/C:/Users/Jane%20Asher/Documents/git/caderno-digital-colaborativo/app/Http/Controllers/PerfilController.php</file>
+            <file>file:/C:/Users/Jane%20Asher/Documents/git/caderno-digital-colaborativo/app/Http/Helpers.php</file>
+            <file>file:/C:/Users/Jane%20Asher/Documents/git/caderno-digital-colaborativo/app/Http/Controllers/LikeController.php</file>
+            <file>file:/C:/Users/Jane%20Asher/Documents/git/caderno-digital-colaborativo/app/Http/Controllers/HomeController.php</file>
+            <file>file:/C:/Users/Jane%20Asher/Documents/git/caderno-digital-colaborativo/resources/views/perfil/perfil.blade.php</file>
+        </group>
+    </open-files>
+</project-private>

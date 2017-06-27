@@ -4,7 +4,7 @@
 
 	@if($reports)
 		@foreach($reports as $report)
-	   		@if($report->status == 1)
+	   		@if($report->status != 2)
 	       		@include('report.report')
 	        @endif
 	    @endforeach

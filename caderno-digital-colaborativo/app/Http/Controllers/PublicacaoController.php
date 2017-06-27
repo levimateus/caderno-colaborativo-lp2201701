@@ -20,7 +20,8 @@ class PublicacaoController extends Controller
     public function index() {
 
         $professores = DB::table('usuario')->where('usuario_cargo', 3)->get();
-        $comments = Comentario::listarTodos();
+        //Pega todos os comentários que estão ativos (Diferentes do status 2)
+        $comments = DB::table('comentario')->where('status',"!=", 2)->get();
         $posts = Publicacao::listarPosts();
         $likes = Like::listarLikes();
         $idUser = Auth::id();
@@ -30,7 +31,7 @@ class PublicacaoController extends Controller
 
     public function show($id) {
         $professores = DB::table('usuario')->where('usuario_cargo', 3)->get();
-        $comments = ComentarioController::listarTodos();
+        $comments = DB::table('comentario')->where('status',"!=", 2)->get();
         $post = Publicacao::listarPostId($id);
         $likes = Like::listarLikes();
         $idUser = Auth::id();
@@ -48,7 +49,8 @@ class PublicacaoController extends Controller
         $post->usuario_id_autor = Auth::id();
         $post->usuario_id_professor = $request->input('professor');
         $post->midia_id = $this->getObtainMedia($request);
-        $post->save();
+<<<<<<< caderno-digital-colaborativo/app/Http/Controllers/PublicacaoController.php
+        $resposta = $post->save();
         $ultimoPost = Publicacao::all()->last();
         $idPost = $ultimoPost->publicacao_id;
 
@@ -83,6 +85,13 @@ class PublicacaoController extends Controller
             $relacionamento->save();
         }
 
+=======
+        
+        if($resposta){
+            \GamificacaoHelper::gamificacao(Auth::id(), 'publicacao', $post->publicacao_id);
+        }
+        
+>>>>>>> caderno-digital-colaborativo/app/Http/Controllers/PublicacaoController.php
         return $this->index();
     }
 
@@ -143,8 +152,19 @@ class PublicacaoController extends Controller
         echo "<img src ='".asset("storage/app/public/publicacoes/".$midia->midia_href)."' />";
     }
 
-    public function excluir() {
-        //exclui publicação
+    public static function updateStatusPost($id, $status) {
+        $updatePost = DB::table('publicacao')
+                        ->where('publicacao_id', $id )
+                        ->update(array("publicacao_status" => $status));
+
+        If ($updatePost) {
+
+            return true;
+        } else {
+            
+            return false;
+        }
+
     }
 
     public function editar(array $dados){

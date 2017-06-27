@@ -53,6 +53,38 @@ CREATE TABLE IF NOT EXISTS `denuncia` (
   CONSTRAINT `denuncia_ibfk_4` FOREIGN KEY (`usuario_id_avaliador`) REFERENCES `usuario` (`usuario_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=69 DEFAULT CHARSET=latin1;
 
+--
+-- Table structure for table `gamificacao_acao`
+--
+
+DROP TABLE IF EXISTS `gamificacao_acao`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `gamificacao_acao` (
+  `gacao_id` int(11) NOT NULL,
+  `gacao_descricao` varchar(250) DEFAULT NULL,
+  `gacao_pontos` decimal(10,0) DEFAULT NULL,
+  PRIMARY KEY (`gacao_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='armazena as acoes e valor de pontos para cada acao';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `gamificacao_nivel`
+--
+
+DROP TABLE IF EXISTS `gamificacao_nivel`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `gamificacao_nivel` (
+  `gnivel_id` int(11) NOT NULL,
+  `gnivel_nivel` decimal(10,0) DEFAULT '0',
+  `gnivel_pontos` decimal(10,0) DEFAULT '0',
+  `gnivel_nome` varchar(250) DEFAULT NULL,
+  `gnivel_descricao` varchar(250) DEFAULT NULL,
+  PRIMARY KEY (`gnivel_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='tabela que contem relaciona os pontos e seus equivalentes em niveis';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
 -- Exportação de dados foi desmarcado.
 -- Copiando estrutura para tabela cadernocolaborativo.iftag
 CREATE TABLE IF NOT EXISTS `iftag` (
@@ -150,6 +182,29 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   KEY `fk_media` (`media_id`),
   CONSTRAINT `usuario_ibfk_1` FOREIGN KEY (`media_id`) REFERENCES `midia` (`midia_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+--
+-- Table structure for table `usuario_gamificacao`
+--
+
+DROP TABLE IF EXISTS `usuario_gamificacao`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `usuario_gamificacao` (
+  `usuario_gamificacao_id` int(11) NOT NULL AUTO_INCREMENT,
+  `usuario_id` int(11) NOT NULL,
+  `gacao_id` int(11) NOT NULL,
+  `data` datetime DEFAULT NULL,
+  `usuario_acao_id` int(11) DEFAULT NULL COMMENT 'acao feita pelo usuario (qual foi o post, like, comentario, etc, que ele realmente fez)',
+  `pontos` int(11) DEFAULT NULL,
+  PRIMARY KEY (`usuario_gamificacao_id`),
+  KEY `usuario_fk_idx` (`usuario_id`),
+  KEY `gobjetivo_fk_idx` (`gacao_id`),
+  CONSTRAINT `gobjetivo_fk` FOREIGN KEY (`gacao_id`) REFERENCES `gamificacao_acao` (`gacao_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `usuario_fk` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`usuario_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1 COMMENT='tabela que armazena as acoes gamificadas feitas pelo usuario';
+/*!40101 SET character_set_client = @saved_cs_client */;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 -- Exportação de dados foi desmarcado.
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

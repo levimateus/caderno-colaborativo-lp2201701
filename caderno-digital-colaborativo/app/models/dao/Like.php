@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Builder;
 
 class Like extends Model
 {
+        protected $primaryKey = 'like_id'; // or null
+	
 	public      $fillable     = [
 		'uduario_id',
 		'publicacao_id',

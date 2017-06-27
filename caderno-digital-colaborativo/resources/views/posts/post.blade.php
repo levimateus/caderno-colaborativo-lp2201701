@@ -9,13 +9,13 @@
             <ul class="dropdown-menu" role="menu">
                 <li>
                     <a 
-                        type="button" 
-                        class="pull-right" 
                         id="abrir_report" 
                         data-toggle="modal" 
                         data-target=".newReport.post{{$post->publicacao_id}}"
                     >
-                        Denunciar <i class="fa fa-bullhorn" aria-hidden="true"></i>
+                        <button class="btn btn-if-down pull-right" type="button"  >
+                            Denunciar <i class="fa fa-bullhorn" aria-hidden="true"></i>    
+                        </button>
                     </a>
                 </li>
             </ul>
@@ -44,9 +44,12 @@
                     @if (count($likes) > 0)
                         @foreach ($likes as $like)
                             @if ($like->publicacao_id == $post->publicacao_id and $like->comentario_id == null)
-                                {{$contagemLike + 1}}
+                                @php
+                                    $contagemLike++;
+                                @endphp
                             @endif
                         @endforeach
+                        {{$contagemLike }}
                         @foreach ($likes as $like)
                             @if($idUser == $like->usuario_id and $like->comentario_id == null and $like->publicacao_id == $post->publicacao_id)
                                 @php
@@ -72,18 +75,21 @@
             @endif
         @endforeach
     </div>
-    <form role="form"  method="POST" action="/comment" accept-charset="UTF-8" enctype="multipart/form-data">
-        {{ csrf_field() }}
-        <div class="clearfix">
-            <input class="col-sm-9 center-align" type="text" placeholder="Comente aqui.." name="comentario" id="comentario" class="form-control" value="" required="required" title="">
-            <input type="hidden" name="publicacao" value="{{$post->publicacao_id}}">
+    @if (Auth::user()->usuario_estado_acesso != 4)
+        <form role="form"  method="POST" action="/comment" accept-charset="UTF-8" enctype="multipart/form-data">
+            {{ csrf_field() }}
+            <div class="clearfix">
+                <input class="col-sm-9 center-align" type="text" placeholder="Comente aqui.." name="comentario" id="comentario" class="form-control" value="" required="required" title="">
+                <input type="hidden" name="publicacao" value="{{$post->publicacao_id}}">
 
-            <button type="submit" class="btn btn-primary btn-if col-sm-3">Enviar</button>
-        </div>
-    </form>
+                <button type="submit" class="btn btn-primary btn-if col-sm-3">Enviar</button>
+            </div>
+        </form>
+    @endif
+
     <span><a href="/post/{{ $post->publicacao_id }}">Saiba mais</a></span>
 </article>
 
-<div class="report">
+<div class="report-modal">
     @include('report.reportModal')
 </div>

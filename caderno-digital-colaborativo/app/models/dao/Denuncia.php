@@ -2,10 +2,17 @@
 
 namespace App\models\dao;
 
+use App\models\dao\Denuncia;
+
 use Illuminate\Database\Eloquent\Model;
 
 class Denuncia extends Model
 {
+    const ATIVO = 1;
+    const INATIVO = 2;
+    const AVALIADO = 3;
+
+
     public      $fillable     = [
         'denuncia_motivo', 
         'denuncia_dt', 

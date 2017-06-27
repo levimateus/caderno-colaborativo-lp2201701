@@ -31,14 +31,20 @@ class Publicacao extends Model
 	static function listarPosts() { 
 		return Publicacao::all();
 	}
+
+
+	static function listarPostsPerfil($id_usuario) { 
+		return Publicacao::where('usuario_id_autor','=',$id_usuario)->get();
+	}
 	
 	static function listarPostId($id) { 
-		return static::where('publicacao_id', '=', $id)->get()->first();;
+		return static::where('publicacao_id', '=', $id)->get()->first();
 	}
 
-	static function getUltimo() { 
-		return static::order_by('publicacao_dt', 'desc')->first();
-	}
+	static function pesquisarPostsDescricao($texto){
+        return Publicacao::where('publicacao_descricao', 'LIKE', '%'.$texto.'%')
+            ->get();
+    }
 
 	public function autor(){
 		return $this->belongsTo('App\models\dao\Usuario', 'usuario_id_autor', 'usuario_id');
@@ -97,5 +103,6 @@ class Publicacao extends Model
 	public function likes(){
 		return $this->belongsToMany('App\User', 'likes');
 	}
+	
 	
 }

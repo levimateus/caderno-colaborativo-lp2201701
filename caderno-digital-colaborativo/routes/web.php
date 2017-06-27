@@ -31,15 +31,22 @@ Route::get('/reports', 'DenunciaController@index');
 Route::get('/perfil/{id_usuario}', 'PerfilController@index');
 Route::get('/perfil/', 'PerfilController@index');
 Route::post('/perfil/trocarFoto', 'PerfilController@trocarFoto');
+Route::get('/seguidores/{id_usuario}', 'PerfilController@getSeguidores');
+Route::get('/seguindo/{id_usuario}', 'PerfilController@getSeguindo');
+Route::post('/seguir', 'PerfilController@seguir');
+Route::post('/deixar-de-seguir', 'PerfilController@deixarDeSeguir');
 
 //Route::get('/post', 'PublicacaoController@index');//TESTE
 Route::post('/post', 'PublicacaoController@publicar');
 Route::post('/comment', 'ComentarioController@comentar');
 Route::post('/report', 'DenunciaController@novaDenuncia');
-Route::post('/report/block/{id}', 'DenunciaController@bloquear');
-Route::post('/report/discard/{id}', 'DenunciaController@descartar');
+Route::post('/report/block', 'DenunciaController@bloquear');
+Route::post('/report/discard', 'DenunciaController@descartar');
+Route::post('/report/user', 'DenunciaController@punirUsuario');
 //Route::get('/post/{id}', 'PublicacaoController@ver'); //TESTE
 
+//rota para pesquisa
+Route::post('/pesquisa', 'PesquisaController@index');
 
 //rota para importação de CSV
 Route::get('/csv', 'UsuarioController@index');
