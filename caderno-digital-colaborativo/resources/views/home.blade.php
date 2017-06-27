@@ -12,11 +12,9 @@
                     <div class="input-group">
                         <div class="input-group-addon">Filtrar por</div>
                         <select name="tipo_pesquisa" id="tipo_pesquisa" class="form-control">
-                            <option value="nenhum">Nenhum</option>
                             <option value="iftags">IfTags</option>
                             <option value="publicacoes">Publicações</option>
                             <option value="usuarios">Usuarios</option>
-                            
                         </select>
                     </div>
                 </div>

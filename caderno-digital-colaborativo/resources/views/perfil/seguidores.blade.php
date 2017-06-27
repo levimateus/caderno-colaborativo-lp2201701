@@ -67,7 +67,7 @@
 		                                <input type="hidden" name="id_usuario" value="{{$seguidor->usuario_id}}">
 		                                <input type="hidden" name="pagina" value="3">
 		                                <div class="pull-right">
-		                                    <button class="btn btn-success">Seguir</button>
+		                                    <button class="btn btn-default">Seguir</button>
 		                                </div>
 		                            </form>
 		                            @endif
