@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 
 use App\models\dao\Usuario;
+use App\models\dao\Iftag;
 use App\models\dao\Publicacao;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -29,10 +30,12 @@ class PesquisaController extends Controller
     {
 
         switch ($request->tipo_pesquisa) {
-            //case 'iftags':
-            //  $usuarios = Usuario::pesquisarUsuariosNome($request->pesquisa);
-            //  return view('pesquisa', compact('usuarios'));
-            //  break;
+            case 'iftags':
+                $iftags = Iftag::pesquisarPostsDescricao($request->pesquisa);
+
+
+                return view('pesquisa', compact('iftags'));
+            break;
 
             case 'publicacoes':
                 $posts = Publicacao::pesquisarPostsDescricao($request->pesquisa);
@@ -40,18 +43,12 @@ class PesquisaController extends Controller
                 $comments = Comentario::listarTodos();
                 $likes = Like::listarLikes();
                 $idUser = Auth::id();
-
-
-
                 return view('home', compact('posts','professores','comments', 'likes', 'idUser'));
             break;
                 
             case 'usuarios':
                 $usuarios = Usuario::pesquisarUsuariosNome($request->pesquisa);
-
-
                 $midias = [];
-
                 foreach ($usuarios as $usuario) {
 
                     $midiaId = $usuario->media_id;
@@ -60,9 +57,8 @@ class PesquisaController extends Controller
 
                         $midias[] = $midia;
                     }
-                    
-
                 }
+
                 return view('pesquisa', compact('usuarios', 'midias'));
             break;
         }

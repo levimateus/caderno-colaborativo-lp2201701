@@ -23,6 +23,11 @@ class Iftag extends Model
         return Iftag::all();
     }
 
+    static function pesquisarIftagNome($texto){
+        return Publicacao::where('iftag_nome', 'LIKE', '%'.$texto.'%')
+            ->get();
+    }
+
     public function iftagsUsuario(): BelongsToMany{
         return $this->belongsToMany(Usuario::class,'relacionamento_interesses' , 'iftag_id', 'usuario_id');
     }
