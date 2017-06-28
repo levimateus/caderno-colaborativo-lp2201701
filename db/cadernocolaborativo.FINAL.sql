@@ -270,10 +270,37 @@ CREATE TABLE `usuario_gamificacao` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
+-- --------------------------------------------------------
+-- Servidor:                     127.0.0.1
+-- Versão do servidor:           10.1.16-MariaDB - mariadb.org binary distribution
+-- OS do Servidor:               Win32
+-- HeidiSQL Versão:              9.4.0.5125
+-- --------------------------------------------------------
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET NAMES utf8 */;
+/*!50503 SET NAMES utf8mb4 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+
+-- Copiando estrutura para tabela cadernodigitalcolaborativo.relacionamento_publicacao_tags
+DROP TABLE IF EXISTS `relacionamento_publicacao_tags`;
+CREATE TABLE IF NOT EXISTS `relacionamento_publicacao_tags` (
+  `iftag_id` int(11) DEFAULT NULL,
+  `publicacao_id` int(11) DEFAULT NULL,
+  KEY `iftag_id` (`iftag_id`),
+  KEY `publicacao_id` (`publicacao_id`),
+  CONSTRAINT `iftag_id` FOREIGN KEY (`iftag_id`) REFERENCES `iftag` (`iftag_id`),
+  CONSTRAINT `publicacao_id` FOREIGN KEY (`publicacao_id`) REFERENCES `publicacao` (`publicacao_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Exportação de dados foi desmarcado.
+/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
+/*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+
+
 -- Dump completed on 2017-06-25 12:43:19
-
-
-
 
 
 

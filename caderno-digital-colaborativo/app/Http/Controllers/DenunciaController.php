@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\PublicacaoController;
 use App\Http\Controllers\ComentarioController;
 use App\Http\Controllers\UsuarioController;
+use App\Helpers\GamificacaoHelper;
 
 use Illuminate\Http\Request;
 use App\models\dao\Denuncia;
@@ -160,7 +161,7 @@ class DenunciaController extends Controller
         }
 
         //adicionando pontos para usuario do reporte
-        \GamificacaoHelper::gamificacao(Auth::id(), 'denuncia', $report->denuncia_id);
+        GamificacaoHelper::gamificacao(Auth::id(), 'denuncia', $report->denuncia_id);
             
         $prof = DB::table('usuario')->where('usuario_id', $report->usuario_id_avaliador)->get();
 

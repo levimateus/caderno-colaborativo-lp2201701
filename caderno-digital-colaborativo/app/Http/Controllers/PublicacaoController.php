@@ -9,6 +9,7 @@ use App\models\dao\Midia;
 use App\models\dao\Like;
 use App\models\dao\Iftag;
 use App\models\dao\RelacionamentoPublicacaoTag;
+use App\Helpers\GamificacaoHelper;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
@@ -85,10 +86,9 @@ class PublicacaoController extends Controller
             $relacionamento->save();
         }
 
-
-        
-        if($resposta){
-            \GamificacaoHelper::gamificacao(Auth::id(), 'publicacao', $post->publicacao_id);
+    
+        if ($resposta) {
+            GamificacaoHelper::gamificacao(Auth::id(), 'publicacao', $post->publicacao_id);
         }
         
 
