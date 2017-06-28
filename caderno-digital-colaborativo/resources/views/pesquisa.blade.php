@@ -3,24 +3,34 @@
 @section('content')
 <div class="container">
 
-
     @foreach($usuarios as $usuario)
-		 @foreach($midias as $foto)
-
-			 <article class="post ifBlock">
+    	<article class="post ifBlock">
 			 	<div class="row">
-			 	@if($usuario->media_id == $foto->midia_id)
-					<div class="col-lg-3">
-						<img src="{{ asset('storage')}}/{{ $foto->midia_href}}" class="img-rounded" alt="" width="150">
-					</div>
+	   		@if(isset($midias))
+			 @foreach($midias as $foto)
 
-				@else
-					<div class="col-lg-3">
-						<img src="{{asset('img')}}/avatar-default.png" class="img-rounded alt="" width="150">
-					</div>
-				@endif
+				 
+				 	@if($usuario->media_id == $foto->midia_id)
+						<div class="col-lg-3">
+							<img src="{{ asset('storage')}}/{{ $foto->midia_href}}" class="img-rounded" alt="" width="150">
+						</div>
 
-				 	<div class="col-lg-9">
+					@else
+						<div class="col-lg-3">
+							<img src="{{asset('img')}}/avatar-default.png" class="img-rounded alt="" width="150">
+						</div>
+					@endif
+
+					 	
+			 	
+			 @endforeach
+			@else
+				<div class="col-lg-3">
+					<img src="{{asset('img')}}/avatar-default.png" class="img-rounded alt="" width="150">
+				</div>
+
+			@endif
+			<div class="col-lg-9">
 						<a href="/perfil/{{$usuario->usuario_id}}"><h3>{{$usuario->usuario_nome.' '.$usuario->usuario_sobrenome}}</h3></a>
 					</div>
 
@@ -29,8 +39,6 @@
 					</div>
 			 	</div>
 			 </article>
-		 	
-		 @endforeach
     @endforeach
 
 </div>
