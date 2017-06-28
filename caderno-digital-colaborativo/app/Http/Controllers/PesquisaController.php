@@ -40,12 +40,30 @@ class PesquisaController extends Controller
                 $comments = Comentario::listarTodos();
                 $likes = Like::listarLikes();
                 $idUser = Auth::id();
+
+
+
                 return view('home', compact('posts','professores','comments', 'likes', 'idUser'));
             break;
                 
             case 'usuarios':
                 $usuarios = Usuario::pesquisarUsuariosNome($request->pesquisa);
-                return view('pesquisa', compact('usuarios'));
+
+
+                $midias = [];
+
+                foreach ($usuarios as $usuario) {
+
+                    $midiaId = $usuario->media_id;
+                    if($midiaId != null){
+                        $midia = Midia::findOrFail($midiaId);
+
+                        $midias[] = $midia;
+                    }
+                    
+
+                }
+                return view('pesquisa', compact('usuarios', 'midias'));
             break;
         }
     }
