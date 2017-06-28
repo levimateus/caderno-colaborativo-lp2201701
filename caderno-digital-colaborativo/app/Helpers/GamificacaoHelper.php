@@ -1,5 +1,5 @@
 <?php
-
+namespace App\Helpers;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -14,6 +14,8 @@
 
 
 use Carbon\Carbon;
+use App\models\dao\GamificacaoAcao;
+use App\models\dao\UsuarioGamificacao;
 
 class GamificacaoHelper {
     
@@ -45,9 +47,9 @@ class GamificacaoHelper {
     }
         
     private static function getPontosGanhos($usuarioId , $acao, $publicacaoId){
-        $gacao = App\models\dao\GamificacaoAcao::where('gacao_descricao', $acao)->first();
+        $gacao = GamificacaoAcao::where('gacao_descricao', $acao)->first();
         
-        $usuario_gamificacao = App\models\dao\UsuarioGamificacao::
+        $usuario_gamificacao = UsuarioGamificacao::
                 where('usuario_id', $usuarioId)
                 ->where('gacao_id', $gacao->gacao_id)
                 ->where('usuario_acao_id', $publicacaoId)
@@ -65,9 +67,9 @@ class GamificacaoHelper {
     }
     
     private static function removerGamificacao($usuarioId , $acao, $publicacaoId){
-        $gacao = App\models\dao\GamificacaoAcao::where('gacao_descricao', $acao)->first();
+        $gacao = GamificacaoAcao::where('gacao_descricao', $acao)->first();
         
-        $usuario_gamificacao = App\models\dao\UsuarioGamificacao::
+        $usuario_gamificacao = UsuarioGamificacao::
                 where('usuario_id', $usuarioId)
                 ->where('gacao_id', $gacao->gacao_id)
                 ->where('usuario_acao_id', $publicacaoId)
@@ -75,7 +77,7 @@ class GamificacaoHelper {
     }
     
     private static function verificaPontos($acao){
-        $gacao = App\models\dao\GamificacaoAcao::where('gacao_descricao', $acao)->first();
+        $gacao = GamificacaoAcao::where('gacao_descricao', $acao)->first();
         return $gacao->gacao_pontos;
     }
     
@@ -89,9 +91,9 @@ class GamificacaoHelper {
     }
     
     private static function registrarGamificacao($usuarioId, $acao, $publicaoId, $pontos){
-        $gacao = App\models\dao\GamificacaoAcao::where('gacao_descricao', $acao)->first();
+        $gacao = GamificacaoAcao::where('gacao_descricao', $acao)->first();
         
-        $usuarioGamificacao = new \App\models\dao\UsuarioGamificacao();
+        $usuarioGamificacao = new UsuarioGamificacao();
         $usuarioGamificacao->usuario_id = $usuarioId;
         $usuarioGamificacao->gacao_id =  $gacao->gacao_id;
         $usuarioGamificacao->usuario_acao_id =  $publicaoId;

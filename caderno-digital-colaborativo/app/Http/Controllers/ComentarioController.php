@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\ComentarioController;
 use Illuminate\Http\RedirectResponse;
+use App\Helpers\GamificacaoHelper;
 
 class ComentarioController extends Controller
 {
@@ -27,7 +28,7 @@ class ComentarioController extends Controller
         $coment->save();
 
         //adicionando pontos para usuario do comentario
-        \GamificacaoHelper::gamificacao(Auth::id(), 'comentario', $coment->comentario_id);
+        GamificacaoHelper::gamificacao(Auth::id(), 'comentario', $coment->comentario_id);
         
         return redirect('post/' . $request->input('publicacao'));
     }

@@ -32,8 +32,8 @@
                     </select>
                     <br>
                     <label for="tags" class="col-sm-2">Tags</label>
+                    <span>*Separe as tags por "#". Exemplo: #estruturadedados #logica"</span>
                     <input type="text" name="tags" id="inputTags" class="form-control" value="" required="required" title="">
-
 
                     <label for="midia" class="col-sm-2">Mídia</label>
                     <input type="file" name="midia" id="midia" class="form-control" value="" required="required" title="">

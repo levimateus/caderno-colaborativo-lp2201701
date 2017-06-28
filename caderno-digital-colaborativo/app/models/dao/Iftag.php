@@ -19,6 +19,10 @@ class Iftag extends Model
     public    $timestamps = false;		//desabilita a gravação de data na alteração na tabela
 
     //interesses
+    static function listarIfTags() { 
+        return Iftag::all();
+    }
+
     public function iftagsUsuario(): BelongsToMany{
         return $this->belongsToMany(Usuario::class,'relacionamento_interesses' , 'iftag_id', 'usuario_id');
     }
