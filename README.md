@@ -1,4 +1,4 @@
-# Cadeno Digital Colaborativo
+# Caderno Digital Colaborativo
 
 O Caderno Digital Colaborativo é uma proposta para estimular o compartilhamento de materiais de aulas presenciais utilizando mecanismos de gamificação para premiar a colaboração e a interação entre os participantes. O objetivo do trabalho era desenvolver a aplicação utilizando uma metodologia ágil, no caso, Scrum.
 # Grupo
